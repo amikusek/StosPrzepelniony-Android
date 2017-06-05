@@ -8,4 +8,8 @@ class LoginRouting
         extends BaseRxRouting<Activity>
         implements LoginContract.Routing {
 
+    @Override
+    public void startMainActivity() {
+
+    }
 }
