@@ -14,8 +14,8 @@ interface LoginContract {
 
     interface View extends MvpView {
         Observable<LoginBundle> getLoginClicks();
-        Observable<Void> getForgottenPasswordClicks();
-        Observable<Void> getSignUpClicks();
+        Observable<Object> getForgottenPasswordClicks();
+        Observable<Object> getSignUpClicks();
         void showError(Throwable throwable);
         void showLoading();
     }
@@ -26,5 +26,7 @@ interface LoginContract {
 
     interface Routing extends ViperRxRouting<Activity> {
         void startMainActivity();
+        void startResetPasswordActivity();
+        void startSignUpActivity();
     }
 }
