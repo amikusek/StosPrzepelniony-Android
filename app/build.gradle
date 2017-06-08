@@ -59,5 +59,7 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
 
+    compile 'com.github.GrenderG:Toasty:1.2.5'
+
     testCompile 'junit:junit:4.12'
 }
