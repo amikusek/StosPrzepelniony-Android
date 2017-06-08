@@ -8,4 +8,9 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="no_account_info">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
+
+    <!-- Exceptions -->
+    <string name="error_empty_password">Password field is empty.</string>
+    <string name="error_incorrect_email">E-mail address is incorrect or empty. Please try again.</string>
+    <string name="error_default">Something gone wrong.</string>
 </resources>
