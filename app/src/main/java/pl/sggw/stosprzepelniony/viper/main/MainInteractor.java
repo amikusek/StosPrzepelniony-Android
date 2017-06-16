@@ -6,4 +6,7 @@ class MainInteractor
         extends BaseRxInteractor
         implements MainContract.Interactor {
 
+    @Override
+    public void logout() {
+    }
 }
