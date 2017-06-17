@@ -29,6 +29,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    // for hashing purposes
+    compile ('com.google.guava:guava:22.0-android', {
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+    })
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -38,10 +43,24 @@ dependencies {
     compile "com.mateuszkoslacz.moviper:moviper-butterknife:$moviper_version"
     compile "com.mateuszkoslacz.moviper:moviper-butterknife-viewstate:$moviper_version"
     compile "com.mateuszkoslacz.moviper:moviper-recyclerview:$moviper_version"
-    compile "com.mateuszkoslacz.moviper:moviper-recyclerview-butterknife:$moviper_version"
+    compile ("com.mateuszkoslacz.moviper:moviper-recyclerview-butterknife:$moviper_version", {
+        exclude group: 'com.jakewharton', module: 'butterknife'
+    })
+
+    compile 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
 
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
-    
+
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
+
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+
+    compile 'com.github.GrenderG:Toasty:1.2.5'
+
     testCompile 'junit:junit:4.12'
 }
