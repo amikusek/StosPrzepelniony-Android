@@ -8,4 +8,8 @@ class RegisterRouting
         extends BaseRxRouting<Activity>
         implements RegisterContract.Routing {
 
+    @Override
+    public void closeScreen() {
+        if (isContextAttached()) getRelatedContext().finish();
+    }
 }
