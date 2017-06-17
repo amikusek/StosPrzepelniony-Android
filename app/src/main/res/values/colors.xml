@@ -18,4 +18,6 @@
 
     <color name="white70">#B3FFFFFF</color>
     <color name="white50">#80FFFFFF</color>
+
+    <color name="text_input_layout_error">#f76c67</color>
 </resources>
