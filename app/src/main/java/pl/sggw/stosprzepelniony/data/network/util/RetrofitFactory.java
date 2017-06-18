@@ -30,4 +30,8 @@ public class RetrofitFactory {
     public StosPrzepelnionyLoginAPI getLoginApi() {
         return retrofit.create(StosPrzepelnionyLoginAPI.class);
     }
+
+    public StosPrzepelnionyResetPasswordAPI getResetPasswordAPI() {
+        return retrofit.create(StosPrzepelnionyResetPasswordAPI.class);
+    }
 }
