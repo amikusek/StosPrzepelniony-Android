@@ -14,7 +14,10 @@
     <color name="hint_text">#61000000</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="white_overlay">#aaffffff</color>
 
     <color name="white70">#B3FFFFFF</color>
     <color name="white50">#80FFFFFF</color>
+
+    <color name="text_input_layout_error">#f76c67</color>
 </resources>

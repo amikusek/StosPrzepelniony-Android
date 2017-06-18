@@ -16,6 +16,22 @@
         <item name="colorAccent">@color/blue</item>
     </style>
 
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen.Blue" parent="@style/Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/white_overlay</item>
+        <item name="android:textColorHint">@color/white_overlay</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <style name="InputError.BlueScreen" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/text_input_layout_error</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

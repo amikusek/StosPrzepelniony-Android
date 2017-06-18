@@ -16,6 +16,9 @@
         <activity
             android:name=".viper.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viper.register.RegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue" />
     </application>
 
 </manifest>

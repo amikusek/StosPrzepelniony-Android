@@ -4,7 +4,10 @@
 
     <string name="email">E-mail</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
     <string name="login">Login</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
     <string name="remember_me">Remember me</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="no_account_info">Don\'t have an account?</string>
@@ -30,5 +33,11 @@
     <string name="error_empty_password">Password field is empty.</string>
     <string name="error_incorrect_email">E-mail address is incorrect or empty. Please try again.</string>
     <string name="error_default">Something gone wrong.</string>
+    <string name="error_not_identical_passwords">Passwords are not identical.</string>
+    <string name="error_empty_first_name">First name field is empty.</string>
+    <string name="error_empty_last_name">Last name field is empty.</string>
+
+    <string name="register_success">Your account has been successfully created. Please check your email for the instructions how to confirm your account.</string>
+
 
 </resources>
