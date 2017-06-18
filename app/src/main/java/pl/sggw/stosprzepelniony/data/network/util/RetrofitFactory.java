@@ -34,4 +34,8 @@ public class RetrofitFactory {
     public StosPrzepelnionyRegisterApi getRegisterApi() {
         return retrofit.create(StosPrzepelnionyRegisterApi.class);
     }
+
+    public StosPrzepelnionyResetPasswordAPI getResetPasswordAPI() {
+        return retrofit.create(StosPrzepelnionyResetPasswordAPI.class);
+    }
 }
