@@ -7,6 +7,10 @@
     <string name="login">Login</string>
     <string name="remember_me">Remember me</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="forgot_password_info">To reset your password, enter the email address you use to sign in www.stosprzepelniony.pl</string>
+    <string name="reset_password">Reset password</string>
+    <string name="reset_password_more_first_part">Need help? Learn more about how to</string>
+    <string name="reset_password_more_second_part">retrieve an existing account.</string>
     <string name="no_account_info">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
     <string name="contact_us">Contact us</string>
@@ -30,5 +34,11 @@
     <string name="error_empty_password">Password field is empty.</string>
     <string name="error_incorrect_email">E-mail address is incorrect or empty. Please try again.</string>
     <string name="error_default">Something gone wrong.</string>
+    <string name="error_not_identical_passwords">Passwords are not identical.</string>
+    <string name="error_empty_first_name">First name field is empty.</string>
+    <string name="error_empty_last_name">Last name field is empty.</string>
+
+    <string name="register_success">Your account has been successfully created. Please check your email for the instructions how to confirm your account.</string>
+    <string name="reset_password_success">Success! You will receive an email with a link to reset your password.</string>
 
 </resources>
