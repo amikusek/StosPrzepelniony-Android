@@ -8,4 +8,8 @@ class ResetPasswordRouting
         extends BaseRxRouting<Activity>
         implements ResetPasswordContract.Routing {
 
+    @Override
+    public void closeScreen() {
+        if (isContextAttached()) getRelatedContext().finish();
+    }
 }
