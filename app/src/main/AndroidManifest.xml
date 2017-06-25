@@ -27,6 +27,9 @@
         <activity
             android:name=".viper.reset_password.ResetPasswordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue" />
+        <activity
+            android:name=".viper.inbox.InboxActivity"
+            android:parentActivityName=".viper.main.MainActivity" />
     </application>
 
 </manifest>
