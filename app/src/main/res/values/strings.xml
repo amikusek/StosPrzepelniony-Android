@@ -20,6 +20,8 @@
     <string name="logo_stos">stos</string>
     <string name="logo_przepelniony">przepełniony</string>
     <string name="email_contact">contact@stosprzepelniony.pl</string>
+    <string name="no_messages">No messages yet</string>
+    <string name="inbox">Inbox</string>
 
     <string name="menu_search">Search</string>
     <string name="menu_filter_list">Filter</string>
