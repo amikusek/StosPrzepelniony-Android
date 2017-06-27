@@ -14,27 +14,31 @@
                 android:name=".viper.login.LoginActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
-            android:name=".viper.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+                android:name=".viper.main.MainActivity"
+                android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".viper.register.RegisterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue" />
+                android:name=".viper.register.RegisterActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue"/>
         <activity
-            android:name=".viper.reset_password.ResetPasswordActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue" />
+                android:name=".viper.reset_password.ResetPasswordActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue"/>
         <activity
-            android:name=".viper.user.UserActivity"
-            android:parentActivityName=".viper.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+                android:name=".viper.user.UserActivity"
+                android:parentActivityName=".viper.main.MainActivity"
+                android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".viper.new_advertisement.NewAdvertisementActivity"
-            android:parentActivityName=".viper.main.MainActivity"
-            android:theme="@style/Theme.NewAdTheme"/>
+                android:name=".viper.new_advertisement.NewAdvertisementActivity"
+                android:parentActivityName=".viper.main.MainActivity"
+                android:theme="@style/Theme.NewAdTheme"/>
+        <activity
+                android:name=".viper.splash.SplashActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
     </application>
 
 </manifest>
