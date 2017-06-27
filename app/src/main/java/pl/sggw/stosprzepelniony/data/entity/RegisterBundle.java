@@ -1,11 +1,16 @@
 package pl.sggw.stosprzepelniony.data.entity;
 
+import com.google.common.hash.Hashing;
+
+import java.nio.charset.Charset;
+
 public class RegisterBundle {
-    String email;
-    String firstName;
-    String lastName;
-    String password;
-    String passwordConfirmation;
+
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String passwordConfirmation;
 
     public RegisterBundle(String email, String firstName, String lastName, String password, String passwordConfirmation) {
         this.email = email;
@@ -33,5 +38,10 @@ public class RegisterBundle {
 
     public String getPasswordConfirmation() {
         return passwordConfirmation;
+    }
+
+    public RegisterBundle withHashedPassword() {
+        password = Hashing.sha256().hashString(password, Charset.forName("UTF-8")).toString();
+        return this;
     }
 }

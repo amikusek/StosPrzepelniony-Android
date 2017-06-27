@@ -6,10 +6,14 @@ import android.text.TextUtils;
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import pl.sggw.stosprzepelniony.data.entity.LoginBundle;
+import pl.sggw.stosprzepelniony.di.DIProvider;
 import pl.sggw.stosprzepelniony.exception.EmptyPasswordFieldException;
 import pl.sggw.stosprzepelniony.exception.IncorrectEmailException;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
+import static pl.sggw.stosprzepelniony.util.ObservableExtensions.withObservableRetryErrorLogic;
 
 public class LoginPresenter
         extends BaseRxPresenter
@@ -29,8 +33,7 @@ public class LoginPresenter
                             .doOnNext(this::validateLoginCredentials)
                             .flatMap(getInteractor()::performLogin)
                             .observeOn(AndroidSchedulers.mainThread())
-                            .doOnError(throwable -> getView().showError(throwable))
-                            .retry()
+                            .compose(withObservableRetryErrorLogic(throwable -> getView().showError(throwable)))
                             .subscribe(loginBundle -> getRouting().startMainActivity()));
             addSubscription(
                     getView()
