@@ -1,8 +1,9 @@
 package pl.sggw.stosprzepelniony.data.network.util;
 
-import okhttp3.OkHttpClient;
 import pl.sggw.stosprzepelniony.data.network.util.interceptors.RestoreCookiesFromPersistentStorageInterceptor;
 import pl.sggw.stosprzepelniony.data.network.util.interceptors.SaveCookiesToPersistentStorageInterceptor;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -15,6 +16,7 @@ public class RetrofitFactory {
     public RetrofitFactory() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(createCookiesPersistentHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
