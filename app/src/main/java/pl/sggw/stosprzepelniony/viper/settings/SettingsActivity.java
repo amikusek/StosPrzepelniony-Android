@@ -12,7 +12,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         if (getSupportActionBar() != null )
-            getSupportActionBar().setTitle(R.string.settings);
+            getSupportActionBar().setTitle(R.string.menu_settings);
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).commit();
 
     }

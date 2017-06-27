@@ -43,6 +43,9 @@
             android:name=".viper.settings.SettingsActivity"
             android:parentActivityName=".viper.main.MainActivity"
             android:theme="@style/SettingsActivity"/>
+        <activity
+            android:name=".viper.inbox.InboxActivity"
+            android:parentActivityName=".viper.main.MainActivity" />
     </application>
 
 </manifest>
