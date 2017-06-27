@@ -15,13 +15,7 @@
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
                 android:name=".viper.main.MainActivity"
-                android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+                android:theme="@style/AppTheme.NoActionBar"/>
         <activity
                 android:name=".viper.register.RegisterActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue"/>
@@ -38,7 +32,13 @@
                 android:theme="@style/Theme.NewAdTheme"/>
         <activity
                 android:name=".viper.splash.SplashActivity"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
