@@ -45,4 +45,8 @@
         <item name="colorControlHighlight">#0c000000</item>
     </style>
 
+    <style name="AppTheme.BlueAccent">
+        <item name="colorAccent">@color/blue</item>
+    </style>
+
 </resources>
