@@ -39,6 +39,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".viper.register.RegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue" />
+        <activity
+            android:name=".viper.reset_password.ResetPasswordActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue" />
+        <activity android:name=".viper.ad_details.AdDetailsActivity"/>
     </application>
 
 </manifest>
