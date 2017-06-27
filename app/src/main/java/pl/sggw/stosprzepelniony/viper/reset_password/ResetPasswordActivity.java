@@ -1,5 +1,7 @@
 package pl.sggw.stosprzepelniony.viper.reset_password;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.transition.TransitionManager;
 import android.view.View;
@@ -14,12 +16,14 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.mateuszkoslacz.moviper.base.view.activity.autoinject.passive.butterknife.ViperButterKnifePassiveActivity;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
-import butterknife.BindView;
-import es.dmoral.toasty.Toasty;
-import io.reactivex.Observable;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.ResetPasswordBundle;
 import pl.sggw.stosprzepelniony.exception.BaseException;
+import pl.sggw.stosprzepelniony.viper.login.LoginActivity;
+
+import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
+import io.reactivex.Observable;
 
 public class ResetPasswordActivity
         extends ViperButterKnifePassiveActivity
@@ -36,6 +40,10 @@ public class ResetPasswordActivity
     ProgressBar loadingView;
     @BindView(R.id.btn_close)
     ImageButton closeActivityButton;
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, ResetPasswordActivity.class));
+    }
 
     @Override
     public Observable<ResetPasswordBundle> getResetPasswordClicks() {

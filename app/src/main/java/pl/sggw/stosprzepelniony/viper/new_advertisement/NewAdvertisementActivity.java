@@ -1,7 +1,11 @@
 package pl.sggw.stosprzepelniony.viper.new_advertisement;
 
 
+import com.google.android.flexbox.FlexboxLayout;
+
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,19 +14,20 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.android.flexbox.FlexboxLayout;
 import com.mateuszkoslacz.moviper.base.view.activity.autoinject.passive.ViperAiPassiveActivity;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
+
+import pl.sggw.stosprzepelniony.R;
+import pl.sggw.stosprzepelniony.data.entity.NewAdvertisementBundle;
+import pl.sggw.stosprzepelniony.exception.BaseException;
+import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
+import pl.sggw.stosprzepelniony.viper.login.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
-import pl.sggw.stosprzepelniony.R;
-import pl.sggw.stosprzepelniony.data.entity.NewAdvertisementBundle;
-import pl.sggw.stosprzepelniony.exception.BaseException;
-import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 
 public class NewAdvertisementActivity
         extends ViperAiPassiveActivity
@@ -45,6 +50,10 @@ public class NewAdvertisementActivity
     private ProgressDialog progressDialog;
     private PublishSubject<Object> dismissButtonClicks = PublishSubject.create();
     private PublishSubject<NewAdvertisementBundle> addButtonClicks = PublishSubject.create();
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, NewAdvertisementActivity.class));
+    }
 
     @Override
     public Observable<Object> getDismissButtonClicks() {
