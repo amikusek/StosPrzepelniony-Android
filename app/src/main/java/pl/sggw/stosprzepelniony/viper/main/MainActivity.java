@@ -1,5 +1,7 @@
 package pl.sggw.stosprzepelniony.viper.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,14 +14,15 @@ import android.widget.Toast;
 import com.mateuszkoslacz.moviper.base.view.activity.autoinject.passive.ViperAiPassiveActivity;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
+import pl.sggw.stosprzepelniony.R;
+import pl.sggw.stosprzepelniony.data.event.NavigationDrawerItemSelectedEvent;
+import pl.sggw.stosprzepelniony.util.constant.NavigationItem;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
-import pl.sggw.stosprzepelniony.R;
-import pl.sggw.stosprzepelniony.data.event.NavigationDrawerItemSelectedEvent;
-import pl.sggw.stosprzepelniony.util.constant.NavigationItem;
 
 public class MainActivity
         extends ViperAiPassiveActivity
@@ -35,10 +38,8 @@ public class MainActivity
 
     PublishSubject<NavigationDrawerItemSelectedEvent> navigationDrawerClicks = PublishSubject.create();
 
-    @NonNull
-    @Override
-    public ViperPresenter<MainContract.View> createPresenter() {
-        return new MainPresenter();
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, MainActivity.class));
     }
 
     private void setUpToolbar() {
@@ -70,11 +71,6 @@ public class MainActivity
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
-    }
-
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         navigationDrawerClicks.onNext(new NavigationDrawerItemSelectedEvent(mapMenuItemToMenuPosition(item)));
         return true;
@@ -101,6 +97,17 @@ public class MainActivity
         else if(item.getItemId() == R.id.nav_settings) return NavigationItem.SETTINGS;
         else if(item.getItemId() == R.id.nav_logout) return NavigationItem.LOGOUT;
         else return NavigationItem.ADS;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @NonNull
+    @Override
+    public ViperPresenter<MainContract.View> createPresenter() {
+        return new MainPresenter();
     }
 
 }
