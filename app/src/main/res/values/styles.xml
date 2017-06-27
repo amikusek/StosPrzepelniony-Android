@@ -45,4 +45,9 @@
         <item name="colorControlHighlight">#0c000000</item>
     </style>
 
+    <style name="Theme.NewAdTheme" parent="@style/AppTheme">
+        <item name="android:homeAsUpIndicator">@drawable/ic_clear</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

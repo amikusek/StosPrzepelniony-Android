@@ -20,6 +20,15 @@
     <string name="logo_stos">stos</string>
     <string name="logo_przepelniony">przepełniony</string>
     <string name="email_contact">contact@stosprzepelniony.pl</string>
+    <string name="new_advertisement">New advertisement</string>
+    <string name="subject">Subject</string>
+    <string name="categories">Categories</string>
+    <string name="content">Content</string>
+    <string name="per_hour">per hour</string>
+    <string name="total_cost">total cost</string>
+    <string name="salary">Salary</string>
+    <string name="please_wait">Please wait</string>
+    <string name="adding_ad">Adding advertisement…</string>
 
     <string name="menu_search">Search</string>
     <string name="menu_filter_list">Filter</string>
@@ -40,8 +49,14 @@
     <string name="error_not_identical_passwords">Passwords are not identical.</string>
     <string name="error_empty_first_name">First name field is empty.</string>
     <string name="error_empty_last_name">Last name field is empty.</string>
+    <string name="error_empty_subject_field">Subject field is empty.</string>
+    <string name="error_incorrect_salary">Salary value is incorrect or empty.</string>
+    <string name="error_no_salary_type">You have to specify type of salary.</string>
+    <string name="error_too_short_description">Minimum length of description is 20 characters.</string>
+    <string name="error_no_category">You have to choose advertisement category.</string>
 
     <string name="register_success">Your account has been successfully created. Please check your email for the instructions how to confirm your account.</string>
     <string name="reset_password_success">Success! You will receive an email with a link to reset your password.</string>
+    <string name="add_advertisement_confirmation">Advertisement has been added.</string>
 
 </resources>

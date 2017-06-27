@@ -38,6 +38,8 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
+    compile 'com.google.android:flexbox:0.2.6'
+
     compile "com.mateuszkoslacz.moviper:moviper-rx:$moviper_version"
     compile "com.mateuszkoslacz.moviper:moviper-viewstate:$moviper_version"
     compile "com.mateuszkoslacz.moviper:moviper-butterknife:$moviper_version"
