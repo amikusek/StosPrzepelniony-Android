@@ -8,4 +8,8 @@ class NewAdvertisementRouting
         extends BaseRxRouting<Activity>
         implements NewAdvertisementContract.Routing {
 
+    @Override
+    public void closeScreen() {
+        if (isContextAttached()) getRelatedContext().finish();
+    }
 }
