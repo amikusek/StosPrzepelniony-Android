@@ -3,18 +3,19 @@ package pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.imp
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentCookieStorage;
+import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentStorage;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class SharedPreferencesPersistentCookieStorage implements PersistentCookieStorage {
+public class SharedPreferencesPersistentStorage implements PersistentStorage {
 
     private static final String SHARED_PREFS_LOCATION = "StackOverflow";
     private static final String COOKIES_STORE_LOCATION = "Cookies";
+    private static final String SESSION_TOKEN_STORE_LOCATION = "SessionToken";
     private SharedPreferences sharedPreferences;
 
-    public SharedPreferencesPersistentCookieStorage(Context context) {
+    public SharedPreferencesPersistentStorage(Context context) {
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS_LOCATION, Context.MODE_PRIVATE);
     }
 
@@ -37,6 +38,19 @@ public class SharedPreferencesPersistentCookieStorage implements PersistentCooki
                 .edit()
                 .remove(COOKIES_STORE_LOCATION)
                 .apply();
+    }
+
+    @Override
+    public void saveSessionToken(String token) {
+        sharedPreferences
+                .edit()
+                .putString(SESSION_TOKEN_STORE_LOCATION, token)
+                .apply();
+    }
+
+    @Override
+    public String getSessionToken() {
+        return sharedPreferences.getString(SESSION_TOKEN_STORE_LOCATION, "");
     }
 }
 

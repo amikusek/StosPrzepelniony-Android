@@ -2,8 +2,8 @@ package pl.sggw.stosprzepelniony.di;
 
 import android.content.Context;
 
-import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentCookieStorage;
-import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.impl.shared_preferences.SharedPreferencesPersistentCookieStorage;
+import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentStorage;
+import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.impl.shared_preferences.SharedPreferencesPersistentStorage;
 
 public class DIProvider {
 
@@ -24,9 +24,9 @@ public class DIProvider {
         this.appContext = context;
     }
 
-    public PersistentCookieStorage getPersistentCookieStorage() {
+    public PersistentStorage getPersistentStorage() {
         assertNonNullContext();
-        return new SharedPreferencesPersistentCookieStorage(appContext);
+        return new SharedPreferencesPersistentStorage(appContext);
     }
 
     private void assertNonNullContext() {

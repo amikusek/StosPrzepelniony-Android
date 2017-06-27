@@ -11,12 +11,16 @@ import okhttp3.Response;
 public class RestoreCookiesFromPersistentStorageInterceptor implements Interceptor {
 
     private String COOKIE_HEADER_FIELD_NAME = "Cookie";
+    private String AUTHENTICATION_HEADER_FIELD_NAME = "Authentication";
 
     public Response intercept(Interceptor.Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
-        for (String cookie : DIProvider.getInstance().getPersistentCookieStorage().getCookies()) {
+        for (String cookie : DIProvider.getInstance().getPersistentStorage().getCookies()) {
             builder.addHeader(COOKIE_HEADER_FIELD_NAME, cookie);
         }
+        builder.addHeader(
+                AUTHENTICATION_HEADER_FIELD_NAME,
+                DIProvider.getInstance().getPersistentStorage().getSessionToken());
         return chain.proceed(builder.build());
     }
 }

@@ -18,7 +18,7 @@ public class SaveCookiesToPersistentStorageInterceptor implements Interceptor {
         Response originalResponse = chain.proceed(chain.request());
         if (!originalResponse.headers(COOKIE_HEADER_FIELD_NAME).isEmpty()) { // `headers()` will never return null
             Set<String> cookies = new HashSet<>(originalResponse.headers(COOKIE_HEADER_FIELD_NAME));
-            DIProvider.getInstance().getPersistentCookieStorage().saveCookies(cookies);
+            DIProvider.getInstance().getPersistentStorage().saveCookies(cookies);
         }
         return originalResponse;
     }
