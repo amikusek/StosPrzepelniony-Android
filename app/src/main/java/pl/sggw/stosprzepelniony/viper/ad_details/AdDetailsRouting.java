@@ -8,4 +8,8 @@ class AdDetailsRouting
         extends BaseRxRouting<Activity>
         implements AdDetailsContract.Routing {
 
+    @Override
+    public void closeScreen() {
+        if (isContextAttached()) getRelatedContext().finish();
+    }
 }
