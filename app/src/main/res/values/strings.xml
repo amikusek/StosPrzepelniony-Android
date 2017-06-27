@@ -20,6 +20,15 @@
     <string name="logo_stos">stos</string>
     <string name="logo_przepelniony">przepełniony</string>
     <string name="email_contact">contact@stosprzepelniony.pl</string>
+    <string name="new_advertisement">New advertisement</string>
+    <string name="subject">Subject</string>
+    <string name="categories">Categories</string>
+    <string name="content">Content</string>
+    <string name="per_hour">per hour</string>
+    <string name="total_cost">total cost</string>
+    <string name="salary">Salary</string>
+    <string name="please_wait">Please wait</string>
+    <string name="adding_ad">Adding advertisement…</string>
 
     <string name="menu_search">Search</string>
     <string name="menu_filter_list">Filter</string>
@@ -43,5 +52,6 @@
 
     <string name="register_success">Your account has been successfully created. Please check your email for the instructions how to confirm your account.</string>
     <string name="reset_password_success">Success! You will receive an email with a link to reset your password.</string>
+    <string name="add_advertisement_confirmation">Advertisement has been added.</string>
 
 </resources>
