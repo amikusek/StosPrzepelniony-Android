@@ -46,6 +46,7 @@
         <activity
             android:name=".viper.inbox.InboxActivity"
             android:parentActivityName=".viper.main.MainActivity" />
+        <activity android:name=".viper.ad_details.AdDetailsActivity"/>
     </application>
 
 </manifest>
