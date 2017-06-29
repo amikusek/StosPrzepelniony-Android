@@ -28,7 +28,7 @@ class LoginInteractor
                         DIProvider
                                 .getInstance()
                                 .getPersistentStorage()
-                                .saveSessionToken(generateSessionToken(result)));
+                                .saveSessionToken(generateSessionToken(result).replace("\n", "")));
     }
 
     private String generateSessionToken(LoginResult loginResult) {

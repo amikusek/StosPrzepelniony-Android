@@ -33,6 +33,8 @@ public class MainPresenter
                                         getView().closeDrawer();
                                     }));
         }
+
+        getRouting().replaceByAdvertisementsFragment();
     }
 
     @NonNull

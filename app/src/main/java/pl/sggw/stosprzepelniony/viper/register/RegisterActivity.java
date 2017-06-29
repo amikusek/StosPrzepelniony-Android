@@ -19,7 +19,6 @@ import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.RegisterBundle;
 import pl.sggw.stosprzepelniony.exception.BaseException;
-import pl.sggw.stosprzepelniony.viper.login.LoginActivity;
 
 import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
@@ -48,6 +47,8 @@ public class RegisterActivity
     ProgressBar loadingView;
     @BindView(R.id.btn_close)
     ImageButton closeActivityButton;
+
+    public static final int REGISTRATION_SUCCEDED_INFO_DURATION_IN_SECONDS = 3;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, RegisterActivity.class));
@@ -97,7 +98,13 @@ public class RegisterActivity
 
     @Override
     public void showRegistrationSuccess() {
-        Toasty.success(this, getString(R.string.register_success), Toast.LENGTH_LONG, true).show();
+        Toasty
+                .success(
+                        getApplicationContext(),
+                        getString(R.string.register_success),
+                        REGISTRATION_SUCCEDED_INFO_DURATION_IN_SECONDS,
+                        true)
+                .show();
     }
 
     @NonNull

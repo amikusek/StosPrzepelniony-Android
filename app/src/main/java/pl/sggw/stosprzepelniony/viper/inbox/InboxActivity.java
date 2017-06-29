@@ -1,5 +1,7 @@
 package pl.sggw.stosprzepelniony.viper.inbox;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,16 +14,17 @@ import android.widget.Toast;
 import com.mateuszkoslacz.moviper.base.view.activity.autoinject.passive.butterknife.ViperButterKnifePassiveActivity;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
-import java.util.List;
-
-import butterknife.BindView;
-import es.dmoral.toasty.Toasty;
-import io.reactivex.Observable;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.MessageBundle;
 import pl.sggw.stosprzepelniony.data.entity.MessageListItem;
 import pl.sggw.stosprzepelniony.exception.BaseException;
 import pl.sggw.stosprzepelniony.viper.inbox.adapter.InboxListAdapter;
+
+import java.util.List;
+
+import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
+import io.reactivex.Observable;
 
 public class InboxActivity
         extends ViperButterKnifePassiveActivity
@@ -36,6 +39,10 @@ public class InboxActivity
     RecyclerView recyclerView;
 
     private InboxListAdapter inboxListAdapter;
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, InboxActivity.class));
+    }
 
     @Override
     public Observable<MessageBundle> getListItemClicks() {
@@ -80,7 +87,7 @@ public class InboxActivity
 
     private void setToolbar() {
         if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle(R.string.inbox);
+            getSupportActionBar().setTitle(R.string.menu_inbox);
     }
 
     @Override
