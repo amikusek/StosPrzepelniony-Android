@@ -44,6 +44,11 @@ public class AdListPresenter
                         .refreshes()
                         .doOnNext(loadAdsSubject::onNext)
                         .subscribe());
+        addSubscription(
+                getView()
+                        .getFabEvents()
+                        .filter(event -> isViewAttached())
+                        .subscribe(event -> getRouting().startNewAdActivity()));
 
         loadAdsSubject.onNext(Irrelevant.EVENT);
     }
