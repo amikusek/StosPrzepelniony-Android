@@ -2,6 +2,7 @@ package pl.sggw.stosprzepelniony.viper.ad_list;
 
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,13 +11,6 @@ import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout;
 import com.mateuszkoslacz.moviper.base.view.fragment.autoinject.passive.butterknife.ViperButterKnifePassiveFragment;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
-import pl.sggw.stosprzepelniony.R;
-import pl.sggw.stosprzepelniony.data.entity.Ad;
-import pl.sggw.stosprzepelniony.data.entity.AdsFilter;
-import pl.sggw.stosprzepelniony.viper.ad_list.adapter.AdListAdapter;
-import pl.sggw.stosprzepelniony.viper.ad_list.item.AdItem;
-import pl.sggw.stosprzepelniony.viper.ad_list.item.AdListItem;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +18,12 @@ import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
+import pl.sggw.stosprzepelniony.R;
+import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.data.entity.AdsFilter;
+import pl.sggw.stosprzepelniony.viper.ad_list.adapter.AdListAdapter;
+import pl.sggw.stosprzepelniony.viper.ad_list.item.AdItem;
+import pl.sggw.stosprzepelniony.viper.ad_list.item.AdListItem;
 
 public class AdListFragment
         extends ViperButterKnifePassiveFragment<AdListContract.View>
@@ -51,8 +51,11 @@ public class AdListFragment
     }
 
     private void initRecyclerView() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = (new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdListAdapter);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(),
+                linearLayoutManager.getOrientation()));
     }
 
     @Override

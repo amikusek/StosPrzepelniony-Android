@@ -3,14 +3,14 @@ package pl.sggw.stosprzepelniony.viper.ad_list.adapter.viewholder;
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import pl.sggw.stosprzepelniony.R;
-import pl.sggw.stosprzepelniony.data.entity.Ad;
+import com.google.android.flexbox.FlexboxLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.sggw.stosprzepelniony.R;
+import pl.sggw.stosprzepelniony.data.entity.Ad;
 
 public class AdViewHolder
         extends RecyclerView.ViewHolder {
@@ -24,7 +24,7 @@ public class AdViewHolder
     @BindView(R.id.content)
     TextView content;
     @BindView(R.id.categoriesContainer)
-    LinearLayout categoriesContainer;
+    FlexboxLayout categoriesContainer;
 
     public AdViewHolder(View itemView) {
         super(itemView);
