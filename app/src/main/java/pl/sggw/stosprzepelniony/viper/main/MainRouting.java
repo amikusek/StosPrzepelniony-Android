@@ -1,12 +1,19 @@
 package pl.sggw.stosprzepelniony.viper.main;
 
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mateuszkoslacz.moviper.base.routing.BaseRxRouting;
 
+import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.event.NavigationDrawerItemSelectedEvent;
 import pl.sggw.stosprzepelniony.util.constant.NavigationItem;
+import pl.sggw.stosprzepelniony.viper.ad_list.AdListFragment;
+import pl.sggw.stosprzepelniony.viper.inbox.InboxActivity;
+import pl.sggw.stosprzepelniony.viper.login.LoginActivity;
+import pl.sggw.stosprzepelniony.viper.settings.SettingsActivity;
+import pl.sggw.stosprzepelniony.viper.user.UserActivity;
 
 class MainRouting
         extends BaseRxRouting<Activity>
@@ -31,36 +38,32 @@ class MainRouting
 
     @Override
     public void startInboxActivity() {
-        if (isContextAttached()) {
-            Toast.makeText(getRelatedContext(), "Routing: start InboxActivity here", Toast.LENGTH_SHORT).show();
-        }
+        if (isContextAttached()) InboxActivity.start(getRelatedContext());
     }
 
     @Override
     public void startUserProfileActivity() {
-        if (isContextAttached()) {
-            Toast.makeText(getRelatedContext(), "Routing: start UserProfile here", Toast.LENGTH_SHORT).show();
-        }
+        if (isContextAttached()) UserActivity.start(getRelatedContext(), 5);
     }
 
     @Override
     public void startSettingsActivity() {
-        if (isContextAttached()) {
-            Toast.makeText(getRelatedContext(), "Routing: start SettingsActivity here", Toast.LENGTH_SHORT).show();
-        }
+        if (isContextAttached()) SettingsActivity.start(getRelatedContext());
     }
 
     @Override
     public void startLoginActivity() {
-        if (isContextAttached()) {
-            Toast.makeText(getRelatedContext(), "Routing: start LoginActivity here", Toast.LENGTH_SHORT).show();
-        }
+        if (isContextAttached()) LoginActivity.start(getRelatedContext());
     }
 
     @Override
     public void replaceByAdvertisementsFragment() {
         if (isContextAttached()) {
-            Toast.makeText(getRelatedContext(), "Routing: replace fragment by AdvertisementsFragment here", Toast.LENGTH_SHORT).show();
+            ((AppCompatActivity) getRelatedContext())
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_main_view, AdListFragment.newInstance())
+                    .commit();
         }
     }
 

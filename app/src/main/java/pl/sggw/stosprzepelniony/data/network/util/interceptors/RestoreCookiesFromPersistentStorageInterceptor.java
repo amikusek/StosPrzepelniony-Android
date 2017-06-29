@@ -11,7 +11,7 @@ import okhttp3.Response;
 public class RestoreCookiesFromPersistentStorageInterceptor implements Interceptor {
 
     private String COOKIE_HEADER_FIELD_NAME = "Cookie";
-    private String AUTHENTICATION_HEADER_FIELD_NAME = "Authentication";
+    private String AUTHENTICATION_HEADER_FIELD_NAME = "Authorization";
 
     public Response intercept(Interceptor.Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
@@ -20,7 +20,7 @@ public class RestoreCookiesFromPersistentStorageInterceptor implements Intercept
         }
         builder.addHeader(
                 AUTHENTICATION_HEADER_FIELD_NAME,
-                DIProvider.getInstance().getPersistentStorage().getSessionToken());
+                "Basic " + DIProvider.getInstance().getPersistentStorage().getSessionToken());
         return chain.proceed(builder.build());
     }
 }

@@ -35,6 +35,6 @@ class LoginInteractor
         return Base64.encodeToString(
                 String.format("%d:%s", loginResult.getUserId(), loginResult.getSessionToken()).getBytes(),
                 Base64.DEFAULT
-        );
+        ).trim();
     }
 }

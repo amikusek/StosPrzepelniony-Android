@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import pl.sggw.stosprzepelniony.data.entity.RegisterBundle;
 import pl.sggw.stosprzepelniony.exception.EmptyFirstNameFieldException;
 import pl.sggw.stosprzepelniony.exception.EmptyLastNameFieldException;
@@ -13,7 +12,9 @@ import pl.sggw.stosprzepelniony.exception.EmptyPasswordFieldException;
 import pl.sggw.stosprzepelniony.exception.IncorrectEmailException;
 import pl.sggw.stosprzepelniony.exception.PasswordsNotIdenticalException;
 
-import static pl.sggw.stosprzepelniony.util.ObservableExtensions.withCompletableRetryErrorLogic;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
+import static pl.sggw.stosprzepelniony.util.ObservableExtensions.withObservableRetryErrorLogic;
 
 public class RegisterPresenter
         extends BaseRxPresenter
@@ -31,10 +32,10 @@ public class RegisterPresenter
                         .filter(event -> isViewAttached())
                         .doOnNext(registerBundle -> getView().showLoading())
                         .doOnNext(this::validateRegisterCredentials)
-                        .flatMapCompletable(getInteractor()::performRegistration)
+                        .flatMapSingle(registerBundle -> getInteractor().performRegistration(registerBundle).toSingleDefault(registerBundle))
                         .observeOn(AndroidSchedulers.mainThread())
-                        .compose(withCompletableRetryErrorLogic(error -> getView().showError(error)))
-                        .subscribe(() -> {
+                        .compose(withObservableRetryErrorLogic(getView()::showError))
+                        .subscribe(event -> {
                             getView().showRegistrationSuccess();
                             getRouting().closeScreen();
                         }));

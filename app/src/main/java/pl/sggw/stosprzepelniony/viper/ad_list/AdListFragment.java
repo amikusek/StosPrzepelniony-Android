@@ -48,6 +48,10 @@ public class AdListFragment
     private PublishSubject<Object> adsFilterChangedSubject = PublishSubject.create();
     private PublishSubject<Object> refreshesSubject = PublishSubject.create();
 
+    public static AdListFragment newInstance() {
+        return new AdListFragment();
+    }
+
     @Override
     protected void injectViews(View view) {
         super.injectViews(view);

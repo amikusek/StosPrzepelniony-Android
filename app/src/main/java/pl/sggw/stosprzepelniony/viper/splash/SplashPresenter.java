@@ -24,14 +24,14 @@ public class SplashPresenter
 
         addSubscription(
                 Single
-                        .timer(2, TimeUnit.SECONDS)
+                        .timer(3, TimeUnit.SECONDS)
                         .doOnSuccess(event -> {
                             if (getInteractor().userHasEmptySessionToken())
                                 throw new MissingSessionTokenException();
                         })
-                        .flatMapCompletable(event -> getInteractor().checkUserSessionStatus())
+                        .flatMap(event -> getInteractor().checkUserSessionStatus().toSingleDefault(event))
                         .subscribe(
-                                () -> getRouting().startMainScreen(),
+                                event -> getRouting().startMainScreen(),
                                 error -> getRouting().startLoginScreen()));
     }
 
