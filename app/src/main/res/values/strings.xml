@@ -58,6 +58,7 @@
     <string name="error_no_salary_type">You have to specify type of salary.</string>
     <string name="error_too_short_description">Minimum length of description is 20 characters.</string>
     <string name="error_no_category">You have to choose advertisement category.</string>
+    <string name="error_empty_message">Message field is empty.</string>
 
     <string name="register_success">Your account has been successfully created. Please check your email for the instructions how to confirm your account.</string>
     <string name="reset_password_success">Success! You will receive an email with a link to reset your password.</string>
