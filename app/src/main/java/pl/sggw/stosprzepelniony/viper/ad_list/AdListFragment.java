@@ -3,7 +3,6 @@ package pl.sggw.stosprzepelniony.viper.ad_list;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -59,11 +58,8 @@ public class AdListFragment
     }
 
     private void initRecyclerView() {
-        LinearLayoutManager linearLayoutManager = (new LinearLayoutManager(getContext()));
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdListAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(),
-                linearLayoutManager.getOrientation()));
     }
 
     @Override
