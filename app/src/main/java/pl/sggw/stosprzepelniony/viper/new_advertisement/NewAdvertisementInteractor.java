@@ -2,9 +2,10 @@ package pl.sggw.stosprzepelniony.viper.new_advertisement;
 
 import com.mateuszkoslacz.moviper.base.interactor.BaseRxInteractor;
 
-import io.reactivex.Completable;
 import pl.sggw.stosprzepelniony.data.entity.NewAdvertisementBundle;
 import pl.sggw.stosprzepelniony.data.network.util.RetrofitFactory;
+
+import io.reactivex.Completable;
 
 class NewAdvertisementInteractor
         extends BaseRxInteractor
@@ -16,10 +17,6 @@ class NewAdvertisementInteractor
     public Completable performAddAdvertisement(NewAdvertisementBundle advertisement) {
         return retrofitFactory
                 .getAddAdvertisementAPI()
-                .performAddAdvertisement(advertisement.getCategoryId(),
-                        advertisement.getSubject(),
-                        advertisement.getDescription(),
-                        (advertisement.getSalaryType() == 1 ? advertisement.getSalary() : 0),
-                        (advertisement.getSalaryType() == 2) ? advertisement.getSalary() : 0);
+                .performAddAdvertisement(advertisement);
     }
 }

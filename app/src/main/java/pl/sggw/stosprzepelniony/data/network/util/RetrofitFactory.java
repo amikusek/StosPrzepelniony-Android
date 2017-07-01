@@ -48,4 +48,8 @@ public class RetrofitFactory {
     public StosPrzepelnionyUsersAPI getUsersAPI() {
         return retrofit.create(StosPrzepelnionyUsersAPI.class);
     }
+
+    public StosPrzepelnionyCategoriesAPI getCategoriesAPI() {
+        return retrofit.create(StosPrzepelnionyCategoriesAPI.class);
+    }
 }

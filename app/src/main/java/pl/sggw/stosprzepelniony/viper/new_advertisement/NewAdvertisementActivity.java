@@ -21,7 +21,6 @@ import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.NewAdvertisementBundle;
 import pl.sggw.stosprzepelniony.exception.BaseException;
 import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
-import pl.sggw.stosprzepelniony.viper.login.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -112,11 +111,13 @@ public class NewAdvertisementActivity
         if (item.getItemId() == android.R.id.home)
             dismissButtonClicks.onNext(Irrelevant.EVENT);
         else if (item.getItemId() == R.id.action_add)
-            addButtonClicks.onNext(new NewAdvertisementBundle(subjectField.getText().toString(),
-                    Double.parseDouble(salaryField.getText().toString().isEmpty() ? "0" : salaryField.getText().toString()),
-                    salaryType.getCheckedRadioButtonId(),
-                    contentField.getText().toString(),
-                    1));
+            addButtonClicks.onNext(
+                    new NewAdvertisementBundle(
+                            subjectField.getText().toString(),
+                            contentField.getText().toString(),
+                            0,
+                            Float.parseFloat(salaryType.getCheckedRadioButtonId() == 1 ? salaryField.getText().toString() : "1"),
+                            Float.parseFloat(salaryType.getCheckedRadioButtonId() == 2 ? salaryField.getText().toString() : "1")));
         return super.onOptionsItemSelected(item);
     }
 

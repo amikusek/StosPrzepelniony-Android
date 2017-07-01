@@ -1,22 +1,22 @@
 package pl.sggw.stosprzepelniony.data.entity;
 
+import static pl.sggw.stosprzepelniony.R.string.salary;
+
 public class NewAdvertisementBundle {
 
-    private String subject;
-    private double salary;
-    private int salaryType;
-    private String description;
     private int categoryId;
+    private String subject;
+    private String content;
+    private float costHour;
+    private float costTotal;
 
-    public NewAdvertisementBundle(String subject, double salary, int salaryType, String description, int categoryId) {
+    public NewAdvertisementBundle(String subject, String content, int categoryId, float costHour, float costTotal) {
         this.subject = subject;
-        this.salary = salary;
-        this.salaryType = salaryType;
-        this.description = description;
+        this.content = content;
         this.categoryId = categoryId;
+        this.costHour = costHour;
+        this.costTotal = costTotal;
     }
-
-    public NewAdvertisementBundle(){}
 
     public String getSubject() {
         return subject;
@@ -26,15 +26,19 @@ public class NewAdvertisementBundle {
         return salary;
     }
 
-    public int getSalaryType() {
-        return salaryType;
-    }
-
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
     public int getCategoryId() {
         return categoryId;
+    }
+
+    public double getCostHour() {
+        return costHour;
+    }
+
+    public double getCostTotal() {
+        return costTotal;
     }
 }

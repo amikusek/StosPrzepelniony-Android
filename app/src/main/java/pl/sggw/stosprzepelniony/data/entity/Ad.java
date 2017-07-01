@@ -8,19 +8,23 @@ public class Ad {
 
     private int id;
     private User user;
+    private Category category;
     private int categoryId;
-    @SerializedName("subject") private String title;
+    @SerializedName("subject")
+    private String title;
     private String content;
-    @SerializedName("costTotal") private float totalCost;
-    @SerializedName("costHour") private float hourCost;
+    @SerializedName("costTotal")
+    private float totalCost;
+    @SerializedName("costHour")
+    private float hourCost;
     private Date date;
 
     public Ad(int id, User user, int categoryId, String title, String content, float totalCost, float hourCost, Date date) {
         this.id = id;
         this.user = user;
-        this.categoryId = categoryId;
         this.title = title;
         this.content = content;
+        this.categoryId = categoryId;
         this.totalCost = totalCost;
         this.hourCost = hourCost;
         this.date = date;
@@ -34,8 +38,8 @@ public class Ad {
         return user;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
     public String getTitle() {
@@ -54,8 +58,17 @@ public class Ad {
         return hourCost;
     }
 
+    public Ad withCategory(Category category) {
+        this.category = category;
+        return this;
+    }
+
     public Date getDate() {
         return date;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
     }
 }
 

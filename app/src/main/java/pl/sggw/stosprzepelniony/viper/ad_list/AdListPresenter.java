@@ -5,8 +5,10 @@ import android.support.annotation.NonNull;
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
+import pl.sggw.stosprzepelniony.data.util.CategoriesCacheStorage;
 import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.subjects.PublishSubject;
 
@@ -31,6 +33,20 @@ public class AdListPresenter
                         .doOnNext(event -> getView().showLoading())
                         .map(emptyEvent -> getView().getAdsFilter())
                         .flatMap(getInteractor()::getAdsWithFilter)
+//                        .observeOn(Schedulers.computation())
+                        .flatMap(ads -> Observable.fromIterable(ads).map(ad -> {
+                            ad.withCategory(CategoriesCacheStorage.getInstance().getCategoryById(ad.getCategoryId()));
+                            System.out.println(ad.getCategory());
+                            return ad;
+                        }).toList().toObservable())
+/*                        .map(ad -> {
+                                    ad.withCategory(CategoriesCacheStorage.getInstance().getCategoryById(ad.getId()));
+                                    System.out.println(ad.getCategory());
+                                    return ad;
+                                }
+                        )
+                        .toList()
+                        .toObservable()*/
                         .observeOn(AndroidSchedulers.mainThread())
                         .compose(withObservableRetryErrorLogic(getView()::showError))
                         .subscribe(view::setAdsItems));

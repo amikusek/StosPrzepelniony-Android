@@ -6,15 +6,16 @@ import android.text.TextUtils;
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import pl.sggw.stosprzepelniony.data.entity.NewAdvertisementBundle;
 import pl.sggw.stosprzepelniony.exception.EmptySubjectFieldException;
 import pl.sggw.stosprzepelniony.exception.IncorrectSalaryValueException;
 import pl.sggw.stosprzepelniony.exception.NoCategoryException;
-import pl.sggw.stosprzepelniony.exception.NoSalaryTypeException;
 import pl.sggw.stosprzepelniony.exception.TooShortAdDescriptionException;
 
-import static pl.sggw.stosprzepelniony.util.ObservableExtensions.withCompletableRetryErrorLogic;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+import static pl.sggw.stosprzepelniony.util.ObservableExtensions.withObservableRetryErrorLogic;
 
 public class NewAdvertisementPresenter
         extends BaseRxPresenter
@@ -32,10 +33,11 @@ public class NewAdvertisementPresenter
                         .filter(event -> isViewAttached())
                         .doOnNext(registerBundle -> getView().showLoading())
                         .doOnNext(this::validateAdvertisement)
-                        .flatMapCompletable(getInteractor()::performAddAdvertisement)
+                        .observeOn(Schedulers.io())
+                        .flatMapSingle(event -> getInteractor().performAddAdvertisement(event).toSingleDefault(event))
                         .observeOn(AndroidSchedulers.mainThread())
-                        .compose(withCompletableRetryErrorLogic(error -> getView().showError(error)))
-                        .subscribe(() -> {
+                        .compose(withObservableRetryErrorLogic(error -> getView().showError(error)))
+                        .subscribe(event -> {
                             getView().showConfirmationInfo();
                             getRouting().closeScreen();
                         }));
@@ -43,6 +45,7 @@ public class NewAdvertisementPresenter
                 getView()
                         .getDismissButtonClicks()
                         .filter(event -> isViewAttached())
+                        .compose(withObservableRetryErrorLogic(error -> getView().showError(error)))
                         .subscribe(event -> getRouting().closeScreen()));
     }
 
@@ -51,9 +54,7 @@ public class NewAdvertisementPresenter
             throw new EmptySubjectFieldException();
         if (advertisement.getSalary() == 0)
             throw new IncorrectSalaryValueException();
-        if (advertisement.getSalaryType() == -1)
-            throw new NoSalaryTypeException();
-        if (advertisement.getDescription().length() <= 20)
+        if (advertisement.getContent().length() <= 20)
             throw new TooShortAdDescriptionException();
         if (advertisement.getCategoryId() == -1)
             throw new NoCategoryException();
