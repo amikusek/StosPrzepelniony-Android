@@ -40,7 +40,7 @@ public class AdViewHolder
         content.setText(ad.getContent());
         if (categoriesContainer.getChildCount() == 0) {
             ChipsView chipsView = new ChipsView(itemView.getContext());
-            chipsView.setText(ad.getCategory().getName());
+            chipsView.setText(ad.getCategory().getCategoryName());
             categoriesContainer.addView(chipsView);
         }
     }

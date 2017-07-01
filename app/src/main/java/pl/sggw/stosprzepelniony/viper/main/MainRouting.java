@@ -2,7 +2,6 @@ package pl.sggw.stosprzepelniony.viper.main;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.mateuszkoslacz.moviper.base.routing.BaseRxRouting;
 
@@ -10,6 +9,7 @@ import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.event.NavigationDrawerItemSelectedEvent;
 import pl.sggw.stosprzepelniony.util.constant.NavigationItem;
 import pl.sggw.stosprzepelniony.viper.ad_list.AdListFragment;
+import pl.sggw.stosprzepelniony.viper.categories.CategoriesFragment;
 import pl.sggw.stosprzepelniony.viper.inbox.InboxActivity;
 import pl.sggw.stosprzepelniony.viper.login.LoginActivity;
 import pl.sggw.stosprzepelniony.viper.settings.SettingsActivity;
@@ -70,7 +70,11 @@ class MainRouting
     @Override
     public void replaceByCategoriesFragment() {
         if (isContextAttached()) {
-            Toast.makeText(getRelatedContext(), "Routing: replace fragment by CategoriesFragment here", Toast.LENGTH_SHORT).show();
+            ((AppCompatActivity) getRelatedContext())
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_main_view, CategoriesFragment.newInstance())
+                    .commit();
         }
     }
 }
