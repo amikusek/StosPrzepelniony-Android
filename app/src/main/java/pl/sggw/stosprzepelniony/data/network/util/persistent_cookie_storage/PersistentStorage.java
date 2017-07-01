@@ -10,4 +10,6 @@ public interface PersistentStorage {
     void saveSessionToken(String token);
     String getSessionToken();
     void clearSessionToken();
+    void setAutoSignInEnabled(boolean enabled);
+    boolean isAutoSignInEnabled();
 }

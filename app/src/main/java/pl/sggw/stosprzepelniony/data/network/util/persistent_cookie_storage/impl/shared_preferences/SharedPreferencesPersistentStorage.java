@@ -13,6 +13,7 @@ public class SharedPreferencesPersistentStorage implements PersistentStorage {
     private static final String SHARED_PREFS_LOCATION = "StackOverflow";
     private static final String COOKIES_STORE_LOCATION = "Cookies";
     private static final String SESSION_TOKEN_STORE_LOCATION = "SessionToken";
+    private static final String AUTO_SIGN_IN_LOCATION = "SessionToken";
     private SharedPreferences sharedPreferences;
 
     public SharedPreferencesPersistentStorage(Context context) {
@@ -60,6 +61,20 @@ public class SharedPreferencesPersistentStorage implements PersistentStorage {
                 .remove(SESSION_TOKEN_STORE_LOCATION)
                 .apply();
     }
+
+    @Override
+    public void setAutoSignInEnabled(boolean enabled) {
+        sharedPreferences
+                .edit()
+                .putBoolean(AUTO_SIGN_IN_LOCATION, enabled)
+                .apply();
+    }
+
+    @Override
+    public boolean isAutoSignInEnabled() {
+        return sharedPreferences.getBoolean(AUTO_SIGN_IN_LOCATION, true);
+    }
+
 }
 
 

@@ -24,6 +24,7 @@ interface SplashContract {
         Completable checkUserSessionStatus();
         Boolean userHasEmptySessionToken();
         Observable<List<Category>> getCategories();
+        Observable<Boolean> isAutoSignInEnabled();
     }
 
     interface Routing extends ViperRxRouting<Activity> {

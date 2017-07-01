@@ -22,13 +22,20 @@ class LoginInteractor
     public Observable<LoginResult> performLogin(LoginBundle loginBundle) {
         return retrofitFactory
                 .getLoginApi()
-                .performLogin(loginBundle.withHashedPassword())
+                .performLogin(loginBundle)
+                .doOnNext()
+//                .performLogin(loginBundle.withHashedPassword())
                 .subscribeOn(Schedulers.io())
                 .doOnNext(result ->
                         DIProvider
                                 .getInstance()
                                 .getPersistentStorage()
                                 .saveSessionToken(generateSessionToken(result)));
+    }
+
+    @Override
+    public void saveSingInMode(boolean enabled) {
+        DIProvider.getInstance().getPersistentStorage().setAutoSignInEnabled(enabled);
     }
 
     private String generateSessionToken(LoginResult loginResult) {

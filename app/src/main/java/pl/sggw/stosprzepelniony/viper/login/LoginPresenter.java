@@ -7,7 +7,6 @@ import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
 import pl.sggw.stosprzepelniony.data.entity.LoginBundle;
-import pl.sggw.stosprzepelniony.di.DIProvider;
 import pl.sggw.stosprzepelniony.exception.EmptyPasswordFieldException;
 import pl.sggw.stosprzepelniony.exception.IncorrectEmailException;
 
@@ -38,13 +37,18 @@ public class LoginPresenter
             addSubscription(
                     getView()
                             .getForgottenPasswordClicks()
-                            .subscribe(object -> getRouting().startResetPasswordActivity(),
-                                    throwable -> getView().showError(throwable)));
+                            .compose(withObservableRetryErrorLogic(throwable -> getView().showError(throwable)))
+                            .subscribe(object -> getRouting().startResetPasswordActivity()));
             addSubscription(
                     getView()
                             .getSignUpClicks()
-                            .subscribe(object -> getRouting().startSignUpActivity(),
-                                    throwable -> getView().showError(throwable)));
+                            .compose(withObservableRetryErrorLogic(throwable -> getView().showError(throwable)))
+                            .subscribe(object -> getRouting().startSignUpActivity()));
+            addSubscription(
+                    getView()
+                            .getAutoSignInClicks()
+                            .compose(withObservableRetryErrorLogic(throwable -> getView().showError(throwable)))
+                            .subscribe(getInteractor()::saveSingInMode));
         }
     }
 

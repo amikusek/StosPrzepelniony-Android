@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.transition.TransitionManager;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,13 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxCompoundButton;
 import com.mateuszkoslacz.moviper.base.view.activity.autoinject.passive.butterknife.ViperButterKnifePassiveActivity;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.LoginBundle;
 import pl.sggw.stosprzepelniony.exception.BaseException;
-import pl.sggw.stosprzepelniony.viper.main.MainActivity;
 
 import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
@@ -42,6 +43,8 @@ public class LoginActivity
     ProgressBar loadingView;
     @BindView(R.id.field_email)
     EditText emailField;
+    @BindView(R.id.switch_auto_sign_in)
+    SwitchCompat switchAutoSignIn;
     @BindView(R.id.field_password)
     EditText passwordField;
 
@@ -67,6 +70,11 @@ public class LoginActivity
     @Override
     public Observable<Object> getSignUpClicks() {
         return RxView.clicks(signUpTextView);
+    }
+
+    @Override
+    public Observable<Boolean> getAutoSignInClicks() {
+        return RxCompoundButton.checkedChanges(switchAutoSignIn).skipInitialValue();
     }
 
     @Override

@@ -31,8 +31,12 @@ public class SplashPresenter
                                 throw new MissingSessionTokenException();
                         })
                         .flatMap(event -> getInteractor().checkUserSessionStatus().toSingleDefault(event))
+                        .flatMapObservable(event -> getInteractor().isAutoSignInEnabled())
                         .subscribe(
-                                event -> getRouting().startMainScreen(),
+                                isAutoSignInEnabled -> {
+                                    if (isAutoSignInEnabled) getRouting().startMainScreen();
+                                    else getRouting().startLoginScreen();
+                                },
                                 error -> getRouting().startLoginScreen()));
         addSubscription(
                 getInteractor()

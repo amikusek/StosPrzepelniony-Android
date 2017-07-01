@@ -8,7 +8,7 @@
     <string name="login">Login</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
-    <string name="remember_me">Remember me</string>
+    <string name="remember_me">Auto sign-in</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="forgot_password_info">To reset your password, enter the email address you use to sign in www.stosprzepelniony.pl</string>
     <string name="reset_password">Reset password</string>

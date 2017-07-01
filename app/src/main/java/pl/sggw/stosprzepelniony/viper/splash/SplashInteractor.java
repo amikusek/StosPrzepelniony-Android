@@ -41,4 +41,12 @@ class SplashInteractor
                 .getCategories()
                 .subscribeOn(Schedulers.io());
     }
+
+    @Override
+    public Observable<Boolean> isAutoSignInEnabled() {
+        return Observable.just(
+                DIProvider.getInstance()
+                        .getPersistentStorage()
+                        .isAutoSignInEnabled());
+    }
 }

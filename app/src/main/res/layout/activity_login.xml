@@ -55,13 +55,15 @@
                 android:paddingRight="4dp">
 
                 <android.support.v7.widget.SwitchCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:switchPadding="8dp"
-                    android:layout_gravity="left|center_vertical"
-                    android:text="@string/remember_me"
-                    android:textColor="@color/black_overlay"
-                    tools:ignore="RtlHardcoded" />
+                        android:id="@+id/switch_auto_sign_in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:switchPadding="8dp"
+                        android:checked="true"
+                        android:layout_gravity="left|center_vertical"
+                        android:text="@string/remember_me"
+                        android:textColor="@color/black_overlay"
+                        tools:ignore="RtlHardcoded"/>
 
                 <TextView
                     android:id="@+id/txt_forgot_password"
