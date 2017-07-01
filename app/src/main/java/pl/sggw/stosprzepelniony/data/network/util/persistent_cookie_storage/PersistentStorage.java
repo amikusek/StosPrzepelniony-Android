@@ -9,4 +9,5 @@ public interface PersistentStorage {
     void removeCookies();
     void saveSessionToken(String token);
     String getSessionToken();
+    void clearSessionToken();
 }

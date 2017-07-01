@@ -52,6 +52,14 @@ public class SharedPreferencesPersistentStorage implements PersistentStorage {
     public String getSessionToken() {
         return sharedPreferences.getString(SESSION_TOKEN_STORE_LOCATION, "");
     }
+
+    @Override
+    public void clearSessionToken() {
+        sharedPreferences
+                .edit()
+                .remove(SESSION_TOKEN_STORE_LOCATION)
+                .apply();
+    }
 }
 
 
