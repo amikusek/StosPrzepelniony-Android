@@ -47,6 +47,18 @@ public class NewAdvertisementPresenter
                         .filter(event -> isViewAttached())
                         .compose(withObservableRetryErrorLogic(error -> getView().showError(error)))
                         .subscribe(event -> getRouting().closeScreen()));
+        addSubscription(
+                getView()
+                        .getCategoriesClicks()
+                        .filter(event -> isViewAttached())
+                        .compose(withObservableRetryErrorLogic(error -> getView().showError(error)))
+                        .subscribe(event -> getView().showCategoryChoosingDialog()));
+
+        addSubscription(
+                getInteractor()
+                        .getCategories()
+                        .subscribe(getView()::setCategories, getView()::showError)
+        );
     }
 
     private void validateAdvertisement(NewAdvertisementBundle advertisement) throws Exception {
