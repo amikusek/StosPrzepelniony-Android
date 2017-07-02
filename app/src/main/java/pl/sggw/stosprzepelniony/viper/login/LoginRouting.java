@@ -14,7 +14,10 @@ class LoginRouting
 
     @Override
     public void startMainActivity() {
-        if (isContextAttached()) MainActivity.start(getRelatedContext());
+        if (isContextAttached()) {
+            MainActivity.start(getRelatedContext());
+            getRelatedContext().finishAffinity();
+        }
     }
 
     @Override
