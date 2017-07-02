@@ -12,6 +12,13 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.mateuszkoslacz.moviper.base.view.fragment.autoinject.passive.butterknife.ViperButterKnifePassiveFragment;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
+import pl.sggw.stosprzepelniony.R;
+import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.data.entity.AdsFilter;
+import pl.sggw.stosprzepelniony.viper.ad_list.adapter.AdListAdapter;
+import pl.sggw.stosprzepelniony.viper.ad_list.item.AdItem;
+import pl.sggw.stosprzepelniony.viper.ad_list.item.AdListItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +26,6 @@ import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
-import pl.sggw.stosprzepelniony.R;
-import pl.sggw.stosprzepelniony.data.entity.Ad;
-import pl.sggw.stosprzepelniony.data.entity.AdsFilter;
-import pl.sggw.stosprzepelniony.viper.ad_list.adapter.AdListAdapter;
-import pl.sggw.stosprzepelniony.viper.ad_list.item.AdItem;
-import pl.sggw.stosprzepelniony.viper.ad_list.item.AdListItem;
 
 public class AdListFragment
         extends ViperButterKnifePassiveFragment<AdListContract.View>
@@ -42,7 +43,7 @@ public class AdListFragment
     FloatingActionButton fab;
 
     private AdsFilter mAdsFilter;
-    private AdListAdapter mAdListAdapter = new AdListAdapter();
+    private AdListAdapter adListAdapter = new AdListAdapter();
     private PublishSubject<Object> loadAdsSubject = PublishSubject.create();
     private PublishSubject<Object> adsFilterChangedSubject = PublishSubject.create();
     private PublishSubject<Object> refreshesSubject = PublishSubject.create();
@@ -59,7 +60,12 @@ public class AdListFragment
 
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setAdapter(mAdListAdapter);
+        mRecyclerView.setAdapter(adListAdapter);
+    }
+
+    @Override
+    public Observable<Ad> getAdClicks() {
+        return adListAdapter.getAdClicks();
     }
 
     @Override
@@ -91,7 +97,7 @@ public class AdListFragment
     public void setAdsItems(List<Ad> ads) {
         List<AdListItem> adItems = new ArrayList<>();
         for (Ad ad : ads) adItems.add(new AdItem(ad));
-        mAdListAdapter.addItems(adItems);
+        adListAdapter.addItems(adItems);
         mRecyclerView.setVisibility(View.VISIBLE);
         viewLoading.setVisibility(View.GONE);
         errorContainer.setVisibility(View.GONE);

@@ -1,11 +1,14 @@
 package pl.sggw.stosprzepelniony.data.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Category implements Parcelable {
 
     private int categoryId;
+    @SerializedName("categoryName")
     private String name;
 
     public Category(int categoryId, String name) {

@@ -1,5 +1,7 @@
 package pl.sggw.stosprzepelniony.data.network.util;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import pl.sggw.stosprzepelniony.data.network.util.interceptors.RestoreCookiesFromPersistentStorageInterceptor;
 import pl.sggw.stosprzepelniony.data.network.util.interceptors.SaveCookiesToPersistentStorageInterceptor;
 
@@ -10,7 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitFactory {
 
-    private static final String BASE_URL = "https://api.stackexchange.com";
+//    private static final String BASE_URL = "https://api.stackexchange.com";
+    private static final String BASE_URL = "http://192.168.0.13:3000";
     private Retrofit retrofit;
 
     public RetrofitFactory() {
@@ -24,6 +27,7 @@ public class RetrofitFactory {
 
     private OkHttpClient createCookiesPersistentHttpClient() {
         return new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
                 .addInterceptor(new RestoreCookiesFromPersistentStorageInterceptor())
                 .addInterceptor(new SaveCookiesToPersistentStorageInterceptor())
                 .build();
@@ -41,8 +45,8 @@ public class RetrofitFactory {
         return retrofit.create(StosPrzepelnionyResetPasswordAPI.class);
     }
 
-    public StosPrzepelnionyAddAdvertisementAPI getAddAdvertisementAPI() {
-        return retrofit.create(StosPrzepelnionyAddAdvertisementAPI.class);
+    public StosPrzepelnionyAdvertisementAPI getAdvertisementAPI() {
+        return retrofit.create(StosPrzepelnionyAdvertisementAPI.class);
     }
 
     public StosPrzepelnionyUsersAPI getUsersAPI() {

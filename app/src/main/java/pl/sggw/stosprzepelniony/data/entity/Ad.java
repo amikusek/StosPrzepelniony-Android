@@ -6,10 +6,10 @@ import java.util.Date;
 
 public class Ad {
 
+    @SerializedName("adId")
     private int id;
     private User user;
     private Category category;
-    private int categoryId;
     @SerializedName("subject")
     private String title;
     private String content;
@@ -19,12 +19,11 @@ public class Ad {
     private float hourCost;
     private Date date;
 
-    public Ad(int id, User user, int categoryId, String title, String content, float totalCost, float hourCost, Date date) {
+    public Ad(int id, User user, String title, String content, float totalCost, float hourCost, Date date) {
         this.id = id;
         this.user = user;
         this.title = title;
         this.content = content;
-        this.categoryId = categoryId;
         this.totalCost = totalCost;
         this.hourCost = hourCost;
         this.date = date;
@@ -58,17 +57,8 @@ public class Ad {
         return hourCost;
     }
 
-    public Ad withCategory(Category category) {
-        this.category = category;
-        return this;
-    }
-
     public Date getDate() {
         return date;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
     }
 }
 
