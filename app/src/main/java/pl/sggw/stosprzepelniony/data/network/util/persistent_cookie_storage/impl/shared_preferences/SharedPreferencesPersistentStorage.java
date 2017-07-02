@@ -3,17 +3,17 @@ package pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.imp
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentStorage;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentStorage;
 
 public class SharedPreferencesPersistentStorage implements PersistentStorage {
 
     private static final String SHARED_PREFS_LOCATION = "StackOverflow";
     private static final String COOKIES_STORE_LOCATION = "Cookies";
     private static final String SESSION_TOKEN_STORE_LOCATION = "SessionToken";
-    private static final String AUTO_SIGN_IN_LOCATION = "SessionToken";
+    private static final String AUTO_SIGN_IN_LOCATION = "AutoSignIn";
     private SharedPreferences sharedPreferences;
 
     public SharedPreferencesPersistentStorage(Context context) {
