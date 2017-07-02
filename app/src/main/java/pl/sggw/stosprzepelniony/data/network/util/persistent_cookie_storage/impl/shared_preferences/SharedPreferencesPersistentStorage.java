@@ -3,10 +3,10 @@ package pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.imp
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentStorage;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentStorage;
 
 public class SharedPreferencesPersistentStorage implements PersistentStorage {
 

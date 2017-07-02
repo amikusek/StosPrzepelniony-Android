@@ -23,7 +23,6 @@ class LoginInteractor
         return retrofitFactory
                 .getLoginApi()
                 .performLogin(loginBundle)
-                .doOnNext()
 //                .performLogin(loginBundle.withHashedPassword())
                 .subscribeOn(Schedulers.io())
                 .doOnNext(result ->

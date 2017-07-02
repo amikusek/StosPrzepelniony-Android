@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Settings">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="AutoSignIn"
+            android:title="Auto login"
+            android:summary="Enable this feature to login automatically in app"/>
+    </PreferenceCategory>
     <PreferenceCategory android:title="About app">
         <PreferenceScreen
             android:summary="SGGW - Informatyka 2014/18 - ISI2"
