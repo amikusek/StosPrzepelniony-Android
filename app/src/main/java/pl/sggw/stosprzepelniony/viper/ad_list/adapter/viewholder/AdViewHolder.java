@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.util.date.DateConverter;
 import pl.sggw.stosprzepelniony.util.view.ChipsView;
 
 public class AdViewHolder
@@ -34,7 +35,7 @@ public class AdViewHolder
 
     public void bindDataObject(Ad ad) {
         title.setText(ad.getTitle());
-        date.setText(String.valueOf(ad.getDate()));
+        date.setText(DateConverter.getFormattedDate(ad.getDate()));
         cost.setText(createProperCostInformationForAd(ad));
         author.setText(String.format("by %s", ad.getUser().getFirstName()));
         if (categoriesContainer.getChildCount() == 0) {

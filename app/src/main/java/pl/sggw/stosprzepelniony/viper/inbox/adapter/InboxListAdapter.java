@@ -14,8 +14,9 @@ import io.reactivex.subjects.PublishSubject;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.MessageBundle;
 import pl.sggw.stosprzepelniony.data.entity.MessageListItem;
+import pl.sggw.stosprzepelniony.util.date.DateConverter;
 
-public class InboxListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class InboxListAdapter extends RecyclerView.Adapter<InboxViewHolder> {
 
     private List<MessageListItem> items = new ArrayList<>();
     public PublishSubject<MessageBundle> messagesClicks = PublishSubject.create();
@@ -31,7 +32,7 @@ public class InboxListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public InboxViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new InboxViewHolder(
                 LayoutInflater
                         .from(parent.getContext())
@@ -39,10 +40,11 @@ public class InboxListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(InboxViewHolder holder, int position) {
+
         MessageBundle dummyBundle = new MessageBundle(1, 1);
-        //TODO: This method is incomplete (remote API is still not ready yet).
-        holder.itemView.findViewById(R.id.user_initials).getBackground().setColorFilter(colors[position % colors.length], PorterDuff.Mode.SRC);
+        holder.userInitials.getBackground().setColorFilter(colors[position % colors.length], PorterDuff.Mode.SRC);
+        holder.date.setText(DateConverter.getFormattedDate(items.get(position).getDate()));
         RxView.clicks(holder.itemView).map(event -> dummyBundle).subscribe(messagesClicks);
     }
 

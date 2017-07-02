@@ -1,8 +1,6 @@
 package pl.sggw.stosprzepelniony.viper.ad_details;
 
 
-import com.google.android.flexbox.FlexboxLayout;
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -13,18 +11,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.flexbox.FlexboxLayout;
 import com.mateuszkoslacz.moviper.base.view.activity.autoinject.passive.butterknife.ViperButterKnifePassiveActivity;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
-
-import pl.sggw.stosprzepelniony.R;
-import pl.sggw.stosprzepelniony.data.entity.Ad;
-import pl.sggw.stosprzepelniony.exception.BaseException;
-import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 
 import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
+import pl.sggw.stosprzepelniony.R;
+import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.exception.BaseException;
+import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
+import pl.sggw.stosprzepelniony.util.date.DateConverter;
 
 public class AdDetailsActivity
         extends ViperButterKnifePassiveActivity
@@ -65,7 +64,7 @@ public class AdDetailsActivity
     @Override
     public void showContent(Ad ad) {
         title.setText(ad.getTitle());
-        date.setText(ad.getDate().toString());
+        date.setText(DateConverter.getFormattedDate(ad.getDate()));
         cost.setText(createProperCostInformationForAd(ad));
         content.setText(ad.getContent());
         loadingView.setVisibility(View.GONE);
