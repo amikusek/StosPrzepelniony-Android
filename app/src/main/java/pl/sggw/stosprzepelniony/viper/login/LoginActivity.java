@@ -74,7 +74,7 @@ public class LoginActivity
 
     @Override
     public Observable<Boolean> getAutoSignInClicks() {
-        return RxCompoundButton.checkedChanges(switchAutoSignIn).skipInitialValue();
+        return RxCompoundButton.checkedChanges(switchAutoSignIn);
     }
 
     @Override
