@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
-import pl.sggw.stosprzepelniony.data.util.CategoriesCacheStorage;
 import pl.sggw.stosprzepelniony.exception.MissingSessionTokenException;
 
 import java.util.concurrent.TimeUnit;
@@ -38,12 +37,6 @@ public class SplashPresenter
                                     else getRouting().startLoginScreen();
                                 },
                                 error -> getRouting().startLoginScreen()));
-        addSubscription(
-                getInteractor()
-                        .getCategories()
-                        .subscribe(CategoriesCacheStorage.getInstance()::setCategories,
-                                Throwable::printStackTrace)
-        );
     }
 
     @NonNull

@@ -6,10 +6,6 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.interactor.ViperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.routing.ViperRxRouting;
 
-import pl.sggw.stosprzepelniony.data.entity.Category;
-
-import java.util.List;
-
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 
@@ -23,7 +19,6 @@ interface SplashContract {
 
         Completable checkUserSessionStatus();
         Boolean userHasEmptySessionToken();
-        Observable<List<Category>> getCategories();
         Observable<Boolean> isAutoSignInEnabled();
     }
 
