@@ -13,28 +13,35 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".viper.login.LoginActivity"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+                android:screenOrientation="portrait"/>
         <activity
                 android:name=".viper.main.MainActivity"
-                android:theme="@style/AppTheme.NoActionBar"/>
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait"/>
         <activity
                 android:name=".viper.register.RegisterActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue"
+                android:screenOrientation="portrait"
                 android:noHistory="true"/>
         <activity
                 android:name=".viper.reset_password.ResetPasswordActivity"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue"/>
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue"
+                android:screenOrientation="portrait"/>
         <activity
                 android:name=".viper.user.UserActivity"
                 android:parentActivityName=".viper.main.MainActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity
                 android:name=".viper.new_advertisement.NewAdvertisementActivity"
                 android:parentActivityName=".viper.main.MainActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.NewAdTheme"/>
         <activity
                 android:name=".viper.splash.SplashActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+                android:screenOrientation="portrait"
                 android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -45,12 +52,19 @@
         <activity
                 android:name=".viper.settings.SettingsActivity"
                 android:parentActivityName=".viper.main.MainActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/SettingsActivity"/>
         <activity
-            android:name=".viper.inbox.InboxActivity"
-            android:parentActivityName=".viper.main.MainActivity" />
-        <activity android:name=".viper.ad_details.AdDetailsActivity"/>
-        <activity android:name=".viper.chat.ChatActivity"/>
+                android:name=".viper.inbox.InboxActivity"
+                android:parentActivityName=".viper.main.MainActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".viper.ad_details.AdDetailsActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".viper.chat.ChatActivity"
+                android:screenOrientation="portrait"
+                />
     </application>
 
 </manifest>
