@@ -7,14 +7,15 @@ import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding2.view.RxView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.subjects.PublishSubject;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.MessageBundle;
 import pl.sggw.stosprzepelniony.data.entity.MessageListItem;
 import pl.sggw.stosprzepelniony.util.date.DateConverter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.subjects.PublishSubject;
 
 public class InboxListAdapter extends RecyclerView.Adapter<InboxViewHolder> {
 
@@ -42,7 +43,7 @@ public class InboxListAdapter extends RecyclerView.Adapter<InboxViewHolder> {
     @Override
     public void onBindViewHolder(InboxViewHolder holder, int position) {
 
-        MessageBundle dummyBundle = new MessageBundle(1, 1);
+        MessageBundle dummyBundle = new MessageBundle(1, 1, "");
         holder.userInitials.getBackground().setColorFilter(colors[position % colors.length], PorterDuff.Mode.SRC);
         holder.date.setText(DateConverter.getFormattedDate(items.get(position).getDate()));
         RxView.clicks(holder.itemView).map(event -> dummyBundle).subscribe(messagesClicks);

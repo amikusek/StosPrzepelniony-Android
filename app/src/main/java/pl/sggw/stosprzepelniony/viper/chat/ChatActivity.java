@@ -18,13 +18,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.mateuszkoslacz.moviper.base.view.activity.autoinject.passive.butterknife.ViperButterKnifePassiveActivity;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import es.dmoral.toasty.Toasty;
-import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.ChatMessageBundle;
 import pl.sggw.stosprzepelniony.data.entity.Message;
@@ -33,7 +26,14 @@ import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 import pl.sggw.stosprzepelniony.viper.chat.adapter.MessagesAdapter;
 import pl.sggw.stosprzepelniony.viper.chat.adapter.item.MessageItem;
 import pl.sggw.stosprzepelniony.viper.chat.adapter.item.MessageListItem;
-import pl.sggw.stosprzepelniony.viper.user.UserActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 
 public class ChatActivity
         extends ViperButterKnifePassiveActivity
@@ -53,16 +53,12 @@ public class ChatActivity
     @BindView(R.id.message_field)
     EditText messageField;
 
-    public static final String USER_ID_BUNDLE = "USER_ID";
-    public static final String AD_ID_BUNDLE = "AD_ID";
-    public static final String INTERLOCUTOR_NAME_BUNDLE = "INTERLOCUTOR_NAME";
-
     private int interlocutorId;
     private int adId;
     private String interlocutorName;
 
     public static void start(Context context, int interlocutorId, int adId, String name) {
-        Intent starter = new Intent(context, UserActivity.class);
+        Intent starter = new Intent(context, ChatActivity.class);
         starter.putExtra(USER_ID_BUNDLE, interlocutorId);
         starter.putExtra(AD_ID_BUNDLE, adId);
         starter.putExtra(INTERLOCUTOR_NAME_BUNDLE, name);
@@ -167,7 +163,7 @@ public class ChatActivity
     @NonNull
     @Override
     public ViperPresenter<ChatContract.View> createPresenter() {
-        return new ChatPresenter();
+        return new ChatPresenter(getArgs());
     }
 
 

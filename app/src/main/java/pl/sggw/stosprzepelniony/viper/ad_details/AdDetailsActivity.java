@@ -4,6 +4,7 @@ package pl.sggw.stosprzepelniony.viper.ad_details;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.data.entity.MessageBundle;
 import pl.sggw.stosprzepelniony.exception.BaseException;
 import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 import pl.sggw.stosprzepelniony.util.date.DateConverter;
@@ -48,7 +50,9 @@ public class AdDetailsActivity
     FlexboxLayout categoriesContainer;
 
     private PublishSubject<Object> backButtonClicks = PublishSubject.create();
+    private PublishSubject<MessageBundle> sendButtonClicks = PublishSubject.create();
     private static final double ZERO = 0.0;
+    private Ad ad;
 
     public static void start(Context context, int adId) {
         Intent starter = new Intent(context, AdDetailsActivity.class);
@@ -62,7 +66,13 @@ public class AdDetailsActivity
     }
 
     @Override
+    public PublishSubject<MessageBundle> getSendButtonClicks() {
+        return sendButtonClicks;
+    }
+
+    @Override
     public void showContent(Ad ad) {
+        this.ad = ad;
         title.setText(ad.getTitle());
         date.setText(DateConverter.getFormattedDate(ad.getDate()));
         cost.setText(createProperCostInformationForAd(ad));
@@ -102,9 +112,18 @@ public class AdDetailsActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.ad_details_menu, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             backButtonClicks.onNext(Irrelevant.EVENT);
+        } else if (item.getItemId() == R.id.btn_send) {
+            sendButtonClicks.onNext(new MessageBundle(ad.getId(), ad.getUser().getId(), ad.getUser().getFirstName()));
         }
         return super.onOptionsItemSelected(item);
     }

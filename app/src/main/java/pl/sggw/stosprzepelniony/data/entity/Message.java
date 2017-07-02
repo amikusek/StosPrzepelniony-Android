@@ -1,16 +1,14 @@
 package pl.sggw.stosprzepelniony.data.entity;
 
-import java.util.Date;
-
 public class Message {
 
     private int messageId;
     private int userIdSender;
     private String content;
-    private Date date;
+    private String date;
     private User user;
 
-    public Message(int messageId, int userIdSender, String content, Date date, User user) {
+    public Message(int messageId, int userIdSender, String content, String date, User user) {
         this.messageId = messageId;
         this.userIdSender = userIdSender;
         this.content = content;
@@ -30,7 +28,7 @@ public class Message {
         return content;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

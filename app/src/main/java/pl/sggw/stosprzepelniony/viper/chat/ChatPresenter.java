@@ -1,15 +1,20 @@
 package pl.sggw.stosprzepelniony.viper.chat;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.subjects.PublishSubject;
 import pl.sggw.stosprzepelniony.data.entity.ChatMessageBundle;
 import pl.sggw.stosprzepelniony.exception.EmptyMessageException;
 import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.subjects.PublishSubject;
 
 import static pl.sggw.stosprzepelniony.util.ObservableExtensions.withObservableRetryErrorLogic;
 
@@ -20,7 +25,11 @@ public class ChatPresenter
                 ChatContract.Routing>
         implements ViperPresenter<ChatContract.View> {
 
-    PublishSubject<Object> refreshMessagesSubject = PublishSubject.create();
+    private PublishSubject<Object> refreshMessagesSubject = PublishSubject.create();
+
+    ChatPresenter(Bundle args) {
+        super(args);
+    }
 
     @Override
     public void attachView(ChatContract.View view) {
@@ -30,7 +39,9 @@ public class ChatPresenter
                 refreshMessagesSubject
                         .filter(event -> isViewAttached())
                         .doOnNext(event -> getView().showLoading())
-                        .flatMap(event -> getInteractor().getMessagesFromUserById(5))
+                        .flatMap(event -> getInteractor().getMessagesFromUserById(
+                                getArgs().getInt(ChatContract.View.AD_ID_BUNDLE),
+                                getArgs().getInt(ChatContract.View.USER_ID_BUNDLE)))
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(messages -> {
                                     if (messages.isEmpty())
@@ -59,6 +70,12 @@ public class ChatPresenter
                         .subscribe(event -> getRouting().closeScreen()));
 
         refreshMessagesSubject.onNext(Irrelevant.EVENT);
+        addSubscription(
+                Observable
+                        .interval(5, TimeUnit.SECONDS)
+                        .map(event -> Irrelevant.EVENT)
+                        .doOnNext(refreshMessagesSubject::onNext)
+                        .subscribe());
     }
 
     private void validateMessageLength(ChatMessageBundle bundle) throws EmptyMessageException {

@@ -11,15 +11,17 @@ import android.widget.Toast;
 import com.mateuszkoslacz.moviper.base.view.fragment.autoinject.passive.butterknife.ViperButterKnifePassiveFragment;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
+import pl.sggw.stosprzepelniony.R;
+import pl.sggw.stosprzepelniony.exception.BaseException;
+import pl.sggw.stosprzepelniony.viper.categories.adapter.CategoriesAdapter;
+import pl.sggw.stosprzepelniony.viper.categories.adapter.item.RootCategory;
+
 import java.util.List;
 
 import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
-import pl.sggw.stosprzepelniony.R;
-import pl.sggw.stosprzepelniony.exception.BaseException;
-import pl.sggw.stosprzepelniony.viper.categories.adapter.CategoriesAdapter;
-import pl.sggw.stosprzepelniony.viper.categories.adapter.item.RootCategory;
+import io.reactivex.subjects.PublishSubject;
 
 public class CategoriesFragment
         extends ViperButterKnifePassiveFragment
@@ -27,6 +29,7 @@ public class CategoriesFragment
         implements CategoriesContract.View {
 
     private CategoriesAdapter categoriesAdapter;
+    private PublishSubject<Integer> childrenClicks = PublishSubject.create();
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -62,6 +65,7 @@ public class CategoriesFragment
     @Override
     public void setMessagesList(List<RootCategory> items) {
         categoriesAdapter = new CategoriesAdapter(items);
+        categoriesAdapter.childrenClicks.subscribe(childrenClicks);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(categoriesAdapter);
         loadingView.setVisibility(View.INVISIBLE);
@@ -70,7 +74,7 @@ public class CategoriesFragment
 
     @Override
     public Observable<Integer> getListItemClicks() {
-        return categoriesAdapter.childrenClicks;
+        return childrenClicks;
     }
 
     @NonNull
@@ -78,7 +82,6 @@ public class CategoriesFragment
     public ViperPresenter<CategoriesContract.View> createPresenter() {
         return new CategoriesPresenter();
     }
-
 
     @Override
     protected int getLayoutId() {

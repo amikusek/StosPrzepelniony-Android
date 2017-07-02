@@ -22,8 +22,7 @@ class LoginInteractor
     public Observable<LoginResult> performLogin(LoginBundle loginBundle) {
         return retrofitFactory
                 .getLoginApi()
-                .performLogin(loginBundle)
-//                .performLogin(loginBundle.withHashedPassword())
+                .performLogin(loginBundle.withHashedPassword())
                 .subscribeOn(Schedulers.io())
                 .doOnNext(result ->
                         DIProvider

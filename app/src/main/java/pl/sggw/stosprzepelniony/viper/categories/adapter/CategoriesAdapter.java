@@ -8,13 +8,14 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
-import java.util.List;
-
-import io.reactivex.subjects.PublishSubject;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.Category;
 import pl.sggw.stosprzepelniony.viper.categories.adapter.view_holder.ChildCategoryViewHolder;
 import pl.sggw.stosprzepelniony.viper.categories.adapter.view_holder.RootViewHolder;
+
+import java.util.List;
+
+import io.reactivex.subjects.PublishSubject;
 
 public class CategoriesAdapter extends ExpandableRecyclerViewAdapter<RootViewHolder, ChildCategoryViewHolder> {
 
@@ -26,8 +27,10 @@ public class CategoriesAdapter extends ExpandableRecyclerViewAdapter<RootViewHol
 
     @Override
     public RootViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_group, parent, false);
-        return new RootViewHolder(view);
+        return new RootViewHolder(
+                LayoutInflater
+                        .from(parent.getContext())
+                        .inflate(R.layout.list_group, parent, false));
     }
 
     @Override

@@ -11,6 +11,8 @@ import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
+import static pl.sggw.stosprzepelniony.util.ObservableExtensions.withObservableRetryErrorLogic;
+
 public class AdDetailsPresenter
         extends BaseRxPresenter
         <AdDetailsContract.View,
@@ -34,12 +36,18 @@ public class AdDetailsPresenter
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(ad -> getView().showContent(ad)
                                 , error -> getView().showError(error)));
-
         addSubscription(
                 getView()
                         .getBackButtonClicks()
                         .filter(event -> isViewAttached())
+                        .compose(withObservableRetryErrorLogic(getView()::showError))
                         .subscribe(event -> getRouting().closeScreen()));
+        addSubscription(
+                getView()
+                        .getSendButtonClicks()
+                        .filter(event -> isViewAttached())
+                        .compose(withObservableRetryErrorLogic(getView()::showError))
+                        .subscribe(getRouting()::startChatScreen));
     }
 
     @NonNull

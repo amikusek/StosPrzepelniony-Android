@@ -5,9 +5,12 @@ import android.support.annotation.NonNull;
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
+import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
+
+import java.util.Collections;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 
 import static pl.sggw.stosprzepelniony.util.ObservableExtensions.withObservableRetryErrorLogic;
 
@@ -29,6 +32,7 @@ public class InboxPresenter
                         .doOnSuccess(event -> getView().showLoading())
                         .flatMapObservable(event -> getInteractor().getMessages())
                         .observeOn(AndroidSchedulers.mainThread())
+                        .onErrorReturn(error -> Collections.emptyList())
                         .compose(withObservableRetryErrorLogic(getView()::showError))
                         .subscribe(messageListItems -> {
                             if (messageListItems.isEmpty())
