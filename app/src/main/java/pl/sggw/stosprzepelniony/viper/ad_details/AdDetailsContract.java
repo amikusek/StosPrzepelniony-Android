@@ -6,13 +6,15 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.interactor.ViperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.routing.ViperRxRouting;
 
-import io.reactivex.Observable;
 import pl.sggw.stosprzepelniony.data.entity.Ad;
+
+import io.reactivex.Observable;
 
 interface AdDetailsContract {
 
 
     interface View extends MvpView {
+        String AD_ID_EXTRA = "AD_ID_EXTRA";
         Observable<Object> getBackButtonClicks();
         void showContent(Ad ad);
         void showError(Throwable throwable);

@@ -47,9 +47,9 @@ public class AdViewHolder
 
     @SuppressLint("DefaultLocale")
     private String createProperCostInformationForAd(Ad ad) {
-        if (ad.getTotalCost() != 0) {
+        if (ad.getTotalCost() != 0 && ad.getTotalCost() != 1) {
             return String.format("%d$ - total cost", ((int) ad.getTotalCost()));
-        } else if (ad.getHourCost() != 0) {
+        } else if (ad.getHourCost() != 0 && ad.getHourCost() != 1) {
             return String.format("%d$/per hour", ((int) ad.getHourCost()));
         } else {
             return "Missing cost information";

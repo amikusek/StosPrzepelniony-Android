@@ -1,13 +1,15 @@
 package pl.sggw.stosprzepelniony.viper.ad_details;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
+import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 
 public class AdDetailsPresenter
         extends BaseRxPresenter
@@ -15,6 +17,10 @@ public class AdDetailsPresenter
                 AdDetailsContract.Interactor,
                 AdDetailsContract.Routing>
         implements ViperPresenter<AdDetailsContract.View> {
+
+    AdDetailsPresenter(Bundle args) {
+        super(args);
+    }
 
     @Override
     public void attachView(AdDetailsContract.View view) {
@@ -24,9 +30,10 @@ public class AdDetailsPresenter
                 Single
                         .just(Irrelevant.EVENT)
                         .filter(event -> isViewAttached())
-                        .flatMapObservable(event -> getInteractor().getAdById(5))
+                        .flatMapObservable(event -> getInteractor().getAdById(getArgs().getInt(AdDetailsContract.View.AD_ID_EXTRA)))
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(ad -> getView().showContent(ad), error -> getView().showError(error)));
+                        .subscribe(ad -> getView().showContent(ad)
+                                , error -> getView().showError(error)));
 
         addSubscription(
                 getView()

@@ -6,17 +6,19 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.interactor.ViperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.routing.ViperRxRouting;
 
+import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.data.entity.AdsFilter;
+
 import java.util.List;
 
 import io.reactivex.Observable;
-import pl.sggw.stosprzepelniony.data.entity.Ad;
-import pl.sggw.stosprzepelniony.data.entity.AdsFilter;
 
 
 interface AdListContract {
 
     interface View extends MvpView {
 
+        Observable<Ad> getAdClicks();
         AdsFilter getAdsFilter();
         Observable<Object> adsFilterChangedEvents();
         Observable<Object> loadAdsEvents();
@@ -34,5 +36,6 @@ interface AdListContract {
 
     interface Routing extends ViperRxRouting<Activity> {
         void startNewAdActivity();
+        void startAdDetailsActivity(int adId);
     }
 }

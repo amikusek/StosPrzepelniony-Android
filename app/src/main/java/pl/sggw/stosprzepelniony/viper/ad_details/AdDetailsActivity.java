@@ -1,6 +1,8 @@
 package pl.sggw.stosprzepelniony.viper.ad_details;
 
 
+import com.google.android.flexbox.FlexboxLayout;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,18 +13,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.flexbox.FlexboxLayout;
 import com.mateuszkoslacz.moviper.base.view.activity.autoinject.passive.butterknife.ViperButterKnifePassiveActivity;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
+
+import pl.sggw.stosprzepelniony.R;
+import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.exception.BaseException;
+import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 
 import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
-import pl.sggw.stosprzepelniony.R;
-import pl.sggw.stosprzepelniony.data.entity.Ad;
-import pl.sggw.stosprzepelniony.exception.BaseException;
-import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 
 public class AdDetailsActivity
         extends ViperButterKnifePassiveActivity
@@ -47,13 +49,11 @@ public class AdDetailsActivity
     FlexboxLayout categoriesContainer;
 
     private PublishSubject<Object> backButtonClicks = PublishSubject.create();
-
-    public static final String AD_ID_BUNDLE = "AD_ID";
     private static final double ZERO = 0.0;
 
     public static void start(Context context, int adId) {
         Intent starter = new Intent(context, AdDetailsActivity.class);
-        starter.putExtra(AD_ID_BUNDLE, adId);
+        starter.putExtra(AD_ID_EXTRA, adId);
         context.startActivity(starter);
     }
 
@@ -66,8 +66,7 @@ public class AdDetailsActivity
     public void showContent(Ad ad) {
         title.setText(ad.getTitle());
         date.setText(ad.getDate().toString());
-        cost.setText(ad.getHourCost() != ZERO ? ad.getHourCost() + "$ per hour" : "");
-        cost.setText(ad.getTotalCost() != ZERO ? ad.getTotalCost() + "$ total cost" : "");
+        cost.setText(createProperCostInformationForAd(ad));
         content.setText(ad.getContent());
         loadingView.setVisibility(View.GONE);
         adView.setVisibility(View.VISIBLE);
@@ -111,10 +110,20 @@ public class AdDetailsActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private String createProperCostInformationForAd(Ad ad) {
+        if (ad.getTotalCost() != 0 && ad.getTotalCost() != 1) {
+            return String.format("%d$ - total cost", ((int) ad.getTotalCost()));
+        } else if (ad.getHourCost() != 0 && ad.getHourCost() != 1) {
+            return String.format("%d$/per hour", ((int) ad.getHourCost()));
+        } else {
+            return "Missing cost information";
+        }
+    }
+
     @NonNull
     @Override
     public ViperPresenter<AdDetailsContract.View> createPresenter() {
-        return new AdDetailsPresenter();
+        return new AdDetailsPresenter(getArgs());
     }
 
 
