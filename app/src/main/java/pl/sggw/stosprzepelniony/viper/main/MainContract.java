@@ -6,8 +6,9 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.interactor.ViperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.routing.ViperRxRouting;
 
-import io.reactivex.Observable;
 import pl.sggw.stosprzepelniony.data.event.NavigationDrawerItemSelectedEvent;
+
+import io.reactivex.Observable;
 
 interface MainContract {
 
@@ -24,9 +25,9 @@ interface MainContract {
     }
 
     interface Routing extends ViperRxRouting<Activity> {
-        void startProperScreenForNavigationEvent(NavigationDrawerItemSelectedEvent event);
+        void startProperScreenForNavigationEvent(NavigationDrawerItemSelectedEvent event, int userId);
         void startInboxActivity();
-        void startUserProfileActivity();
+        void startUserProfileActivity(int userId);
         void startSettingsActivity();
         void startLoginActivity();
         void replaceByAdvertisementsFragment();

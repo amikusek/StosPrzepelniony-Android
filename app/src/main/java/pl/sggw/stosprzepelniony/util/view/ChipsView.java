@@ -29,9 +29,10 @@ public class ChipsView extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setText(String text) {
+    public ChipsView withText (String text) {
         textView.setText(text);
         invalidate();
         requestLayout();
+        return this;
     }
 }

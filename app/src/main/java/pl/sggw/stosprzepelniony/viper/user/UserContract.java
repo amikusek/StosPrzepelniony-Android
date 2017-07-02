@@ -6,16 +6,19 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.interactor.ViperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.routing.ViperRxRouting;
 
+import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.data.entity.User;
+
 import java.util.List;
 
 import io.reactivex.Observable;
-import pl.sggw.stosprzepelniony.data.entity.Ad;
-import pl.sggw.stosprzepelniony.data.entity.User;
 
 interface UserContract {
 
 
     interface View extends MvpView {
+
+        String USER_ID_BUNDLE = "USER_ID";
         void showEmptyState();
         void showLoading();
         void showContent(List<Ad> userAds);

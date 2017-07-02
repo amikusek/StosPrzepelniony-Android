@@ -2,30 +2,34 @@ package pl.sggw.stosprzepelniony.viper.user;
 
 import com.mateuszkoslacz.moviper.base.interactor.BaseRxInteractor;
 
-import java.util.ArrayList;
-import java.util.Date;
+import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.data.entity.User;
+import pl.sggw.stosprzepelniony.data.network.util.RetrofitFactory;
+
 import java.util.List;
 
 import io.reactivex.Observable;
-import pl.sggw.stosprzepelniony.data.entity.Ad;
-import pl.sggw.stosprzepelniony.data.entity.User;
+import io.reactivex.schedulers.Schedulers;
 
 class UserInteractor
         extends BaseRxInteractor
         implements UserContract.Interactor {
 
+    private RetrofitFactory retrofitFactory = new RetrofitFactory();
+
     @Override
     public Observable<User> getUserInfoById(int userdId) {
-        //We are creating dummy objects here because remote API is still not ready yet.
-        return Observable.just(new User("John", "Doe", "johndoe@mail.com"));
+        return retrofitFactory
+                .getUsersAPI()
+                .getUserById(userdId)
+                .subscribeOn(Schedulers.io());
     }
 
     @Override
     public Observable<List<Ad>> getAdsByUserId(int userId) {
-        //We are creating dummy objects here because remote API is still not ready yet.
-        List<Ad> ads = new ArrayList<>();
-        ads.add(new Ad(3, new User(), "To jest tytul1", "To jest content1", 5000f, 50f, new Date()));
-        ads.add(new Ad(3, new User(), "To jest tytul2", "To jest content2", 0, 40f, new Date()));
-        return Observable.just(ads);
+        return retrofitFactory
+                .getAdvertisementAPI()
+                .getAdsForUserId(userId)
+                .subscribeOn(Schedulers.io());
     }
 }

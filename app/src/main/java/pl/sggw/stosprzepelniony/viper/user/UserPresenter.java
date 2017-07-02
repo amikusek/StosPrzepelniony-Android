@@ -1,13 +1,16 @@
 package pl.sggw.stosprzepelniony.viper.user;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.util.Pair;
 
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
+import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
 
 public class UserPresenter
         extends BaseRxPresenter
@@ -15,6 +18,10 @@ public class UserPresenter
                 UserContract.Interactor,
                 UserContract.Routing>
         implements ViperPresenter<UserContract.View> {
+
+    UserPresenter(Bundle args) {
+        super(args);
+    }
 
     @Override
     public void attachView(UserContract.View view) {
@@ -24,21 +31,16 @@ public class UserPresenter
                 Single
                         .just(Irrelevant.EVENT)
                         .filter(event -> isViewAttached())
-                        .flatMapObservable(event -> getInteractor().getAdsByUserId(5))
+                        .flatMapObservable(event -> getInteractor().getAdsByUserId(getArgs().getInt(UserContract.View.USER_ID_BUNDLE)))
+                        .zipWith(getInteractor().getUserInfoById(getArgs().getInt(UserContract.View.USER_ID_BUNDLE)), Pair::new)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(userAds -> {
-                            if (userAds.isEmpty())
+                        .subscribe(pair -> {
+                            getView().showUserInfo(pair.second);
+                            if (pair.first.isEmpty())
                                 getView().showEmptyState();
                             else
-                                getView().showContent(userAds);
+                                getView().showContent(pair.first);
                         }, error -> getView().showError(error)));
-        addSubscription(
-                Single
-                        .just(Irrelevant.EVENT)
-                        .filter(event -> isViewAttached())
-                        .flatMapObservable(event -> getInteractor().getUserInfoById(5))
-                        .subscribe(user -> getView().showUserInfo(user), error -> getView().showError(error))
-        );
         addSubscription(
                 getView()
                         .getListItemClicks()

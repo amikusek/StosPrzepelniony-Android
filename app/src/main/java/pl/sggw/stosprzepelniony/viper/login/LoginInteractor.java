@@ -22,13 +22,19 @@ class LoginInteractor
     public Observable<LoginResult> performLogin(LoginBundle loginBundle) {
         return retrofitFactory
                 .getLoginApi()
-                .performLogin(loginBundle.withHashedPassword())
+                .performLogin(loginBundle)
+//                .performLogin(loginBundle.withHashedPassword())
                 .subscribeOn(Schedulers.io())
-                .doOnNext(result ->
-                        DIProvider
-                                .getInstance()
-                                .getPersistentStorage()
-                                .saveSessionToken(generateSessionToken(result)));
+                .doOnNext(result -> {
+                            DIProvider
+                                    .getInstance()
+                                    .getPersistentStorage()
+                                    .saveSessionToken(generateSessionToken(result));
+                            DIProvider
+                                    .getInstance()
+                                    .getPersistentStorage()
+                                    .saveUserId(result.getUserId());
+                        });
     }
 
     @Override

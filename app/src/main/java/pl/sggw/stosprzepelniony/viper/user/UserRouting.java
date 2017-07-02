@@ -1,11 +1,11 @@
 package pl.sggw.stosprzepelniony.viper.user;
 
 import android.app.Activity;
-import android.widget.Toast;
 
 import com.mateuszkoslacz.moviper.base.routing.BaseRxRouting;
 
 import pl.sggw.stosprzepelniony.data.entity.Ad;
+import pl.sggw.stosprzepelniony.viper.ad_details.AdDetailsActivity;
 
 class UserRouting
         extends BaseRxRouting<Activity>
@@ -13,8 +13,6 @@ class UserRouting
 
     @Override
     public void startAdDetailsActivity(Ad ad) {
-        if (isContextAttached()) {
-            Toast.makeText(getRelatedContext(), "Routing: start DetailsActivity here: id"+String.valueOf(ad.getId()), Toast.LENGTH_SHORT).show();
-        }
+        if (isContextAttached()) AdDetailsActivity.start(getRelatedContext(), ad.getId());
     }
 }

@@ -68,7 +68,7 @@ public class NewAdvertisementPresenter
             throw new IncorrectSalaryValueException();
         if (advertisement.getContent().length() <= 20)
             throw new TooShortAdDescriptionException();
-        if (advertisement.getCategoryId() == -1)
+        if (advertisement.getCategoryId() == NewAdvertisementContract.View.NO_CATEGORY)
             throw new NoCategoryException();
     }
 

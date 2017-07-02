@@ -1,18 +1,19 @@
 package pl.sggw.stosprzepelniony.viper.ad_list.adapter.viewholder;
 
+import com.google.android.flexbox.FlexboxLayout;
+
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.flexbox.FlexboxLayout;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.Ad;
 import pl.sggw.stosprzepelniony.util.date.DateConverter;
 import pl.sggw.stosprzepelniony.util.view.ChipsView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class AdViewHolder
         extends RecyclerView.ViewHolder {
@@ -39,9 +40,7 @@ public class AdViewHolder
         cost.setText(createProperCostInformationForAd(ad));
         author.setText(String.format("by %s", ad.getUser().getFirstName()));
         if (categoriesContainer.getChildCount() == 0) {
-            ChipsView chipsView = new ChipsView(itemView.getContext());
-            chipsView.setText(ad.getCategory().getCategoryName());
-            categoriesContainer.addView(chipsView);
+            categoriesContainer.addView(new ChipsView(itemView.getContext()).withText(ad.getCategory().getCategoryName()));
         }
     }
 

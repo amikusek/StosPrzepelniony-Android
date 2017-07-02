@@ -24,6 +24,7 @@ import pl.sggw.stosprzepelniony.data.entity.NewAdvertisementBundle;
 import pl.sggw.stosprzepelniony.data.entity.SingleCategory;
 import pl.sggw.stosprzepelniony.exception.BaseException;
 import pl.sggw.stosprzepelniony.util.constant.Irrelevant;
+import pl.sggw.stosprzepelniony.util.view.ChipsView;
 
 import java.util.List;
 
@@ -55,6 +56,7 @@ public class NewAdvertisementActivity
     private List<SingleCategory> categories;
     private PublishSubject<Object> dismissButtonClicks = PublishSubject.create();
     private PublishSubject<NewAdvertisementBundle> addButtonClicks = PublishSubject.create();
+    private int chosenCategoryId = NO_CATEGORY;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, NewAdvertisementActivity.class));
@@ -114,11 +116,18 @@ public class NewAdvertisementActivity
     @Override
     public void showCategoryChoosingDialog() {
         CharSequence[] categoriesNames = new CharSequence[categories.size()];
-        for (int i = 0; i < categoriesNames.length; i++) categoriesNames[i] = categories.get(i).getCategoryName();
+        for (int i = 0; i < categoriesNames.length; i++)
+            categoriesNames[i] = categories.get(i).getCategoryName();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle("Choose category")
-                .setItems(categoriesNames, (dialog, which) -> dialog.cancel());
+                .setCancelable(false)
+                .setItems(categoriesNames, (dialog, which) -> {
+                    chosenCategoryId = categories.get(which).getCategoryId();
+                    if (categoriesFlexboxLayout.getChildCount() != 0)
+                        categoriesFlexboxLayout.removeViewAt(0);
+                    categoriesFlexboxLayout.addView(new ChipsView(getContext()).withText(categories.get(which).getCategoryName()));
+                });
         AlertDialog alert = builder.create();
         alert.show();
     }
@@ -143,7 +152,7 @@ public class NewAdvertisementActivity
                     new NewAdvertisementBundle(
                             subjectField.getText().toString(),
                             contentField.getText().toString(),
-                            5,
+                            chosenCategoryId,
                             Float.parseFloat(salaryType.getCheckedRadioButtonId() == 1 ? salaryField.getText().toString() : "1"),
                             Float.parseFloat(salaryType.getCheckedRadioButtonId() == 2 ? salaryField.getText().toString() : "1")));
         return super.onOptionsItemSelected(item);

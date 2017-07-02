@@ -19,7 +19,7 @@ class MainRouting
         extends BaseRxRouting<Activity>
         implements MainContract.Routing {
 
-    public void startProperScreenForNavigationEvent(NavigationDrawerItemSelectedEvent event) {
+    public void startProperScreenForNavigationEvent(NavigationDrawerItemSelectedEvent event, int userId) {
         if (isContextAttached()) {
             if (event.getNavigationItem() == NavigationItem.ADS)
                 replaceByAdvertisementsFragment();
@@ -28,7 +28,7 @@ class MainRouting
             else if (event.getNavigationItem() == NavigationItem.INBOX)
                 startInboxActivity();
             else if (event.getNavigationItem() == NavigationItem.PROFILE)
-                startUserProfileActivity();
+                startUserProfileActivity(userId);
             else if (event.getNavigationItem() == NavigationItem.SETTINGS)
                 startSettingsActivity();
             else if (event.getNavigationItem() == NavigationItem.LOGOUT)
@@ -42,8 +42,8 @@ class MainRouting
     }
 
     @Override
-    public void startUserProfileActivity() {
-        if (isContextAttached()) UserActivity.start(getRelatedContext(), 5);
+    public void startUserProfileActivity(int userId) {
+        if (isContextAttached()) UserActivity.start(getRelatedContext(), userId);
     }
 
     @Override

@@ -1,10 +1,12 @@
 package pl.sggw.stosprzepelniony.viper.main;
 
 import android.support.annotation.NonNull;
+import android.support.v4.util.Pair;
 
 import com.mateuszkoslacz.moviper.base.presenter.BaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
+import pl.sggw.stosprzepelniony.di.DIProvider;
 import pl.sggw.stosprzepelniony.util.constant.NavigationItem;
 
 public class MainPresenter
@@ -28,10 +30,11 @@ public class MainPresenter
                             })
                             .doOnError(error -> getView().showError(error))
                             .retry()
+                            .map(event -> new Pair<>(event, DIProvider.getInstance().getPersistentStorage().getUserId()))
                             .subscribe(event -> {
-                                        getRouting().startProperScreenForNavigationEvent(event);
-                                        getView().closeDrawer();
-                                    }));
+                                getRouting().startProperScreenForNavigationEvent(event.first, event.second);
+                                getView().closeDrawer();
+                            }));
         }
 
         getRouting().replaceByAdvertisementsFragment();

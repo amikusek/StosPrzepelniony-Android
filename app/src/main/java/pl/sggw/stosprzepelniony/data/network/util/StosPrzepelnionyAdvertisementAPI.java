@@ -11,6 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface StosPrzepelnionyAdvertisementAPI {
 
@@ -19,6 +20,9 @@ public interface StosPrzepelnionyAdvertisementAPI {
 
     @GET("ads/{adId}/info")
     Observable<Ad> getAdById(@Path("adId") int adId);
+
+    @GET("ads/list")
+    Observable<List<Ad>> getAdsForUserId(@Query("userId") int adId);
 
     @GET("ads/list")
     Observable<List<Ad>> getAds();

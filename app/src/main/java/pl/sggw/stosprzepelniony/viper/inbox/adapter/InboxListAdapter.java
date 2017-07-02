@@ -46,6 +46,7 @@ public class InboxListAdapter extends RecyclerView.Adapter<InboxViewHolder> {
         MessageBundle dummyBundle = new MessageBundle(1, 1, "");
         MessageListItem messageListItem = items.get(position);
         holder.userInitials.getBackground().setColorFilter(colors[position % colors.length], PorterDuff.Mode.SRC);
+        holder.userInitials.setText(""+messageListItem.getUser().getFirstName().charAt(0) + messageListItem.getUser().getLastName().charAt(0));
         holder.date.setText(DateConverter.getFormattedDate(messageListItem.getDate()));
         holder.author.setText(String.format("%s %s", messageListItem.getUser().getFirstName(), messageListItem.getUser().getLastName()));
         holder.message.setText(messageListItem.getAd().getTitle());

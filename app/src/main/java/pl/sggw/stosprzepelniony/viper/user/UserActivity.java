@@ -17,16 +17,17 @@ import android.widget.Toast;
 import com.mateuszkoslacz.moviper.base.view.activity.autoinject.passive.butterknife.ViperButterKnifePassiveActivity;
 import com.mateuszkoslacz.moviper.iface.presenter.ViperPresenter;
 
-import java.util.List;
-
-import butterknife.BindView;
-import es.dmoral.toasty.Toasty;
-import io.reactivex.Observable;
 import pl.sggw.stosprzepelniony.R;
 import pl.sggw.stosprzepelniony.data.entity.Ad;
 import pl.sggw.stosprzepelniony.data.entity.User;
 import pl.sggw.stosprzepelniony.exception.BaseException;
 import pl.sggw.stosprzepelniony.viper.user.adapter.AdsAdapter;
+
+import java.util.List;
+
+import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
+import io.reactivex.Observable;
 
 public class UserActivity
         extends ViperButterKnifePassiveActivity<UserContract.View>
@@ -48,8 +49,6 @@ public class UserActivity
     TextView userEmail;
 
     private AdsAdapter adsAdapter = new AdsAdapter();
-
-    public static final String USER_ID_BUNDLE = "USER_ID";
 
     public static void start(Context context, int userId) {
         Intent starter = new Intent(context, UserActivity.class);
@@ -124,7 +123,7 @@ public class UserActivity
     @NonNull
     @Override
     public ViperPresenter<UserContract.View> createPresenter() {
-        return new UserPresenter();
+        return new UserPresenter(getArgs());
     }
 
 

@@ -19,6 +19,7 @@ interface NewAdvertisementContract {
 
     interface View extends MvpView {
 
+        int NO_CATEGORY = -997;
         Observable<Object> getCategoriesClicks();
         Observable<Object> getDismissButtonClicks();
         Observable<NewAdvertisementBundle> getAddButtonClicks();

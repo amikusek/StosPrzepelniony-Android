@@ -22,7 +22,7 @@
     <string name="email_contact">contact@stosprzepelniony.pl</string>
     <string name="new_advertisement">New advertisement</string>
     <string name="subject">Subject</string>
-    <string name="categories">Categories</string>
+    <string name="category">Category</string>
     <string name="content">Content</string>
     <string name="per_hour">per hour</string>
     <string name="total_cost">total cost</string>
