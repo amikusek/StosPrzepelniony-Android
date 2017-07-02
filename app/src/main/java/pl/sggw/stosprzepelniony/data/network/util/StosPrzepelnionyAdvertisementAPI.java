@@ -17,9 +17,9 @@ public interface StosPrzepelnionyAdvertisementAPI {
     @POST("ads/add")
     Completable performAddAdvertisement(@Body NewAdvertisementBundle newAdvertisementBundle);
 
-    @GET("/ads/{adId}/info")
+    @GET("ads/{adId}/info")
     Observable<Ad> getAdById(@Path("adId") int adId);
 
-    @GET("/ads/list")
+    @GET("ads/list")
     Observable<List<Ad>> getAds();
 }

@@ -44,8 +44,11 @@ public class InboxListAdapter extends RecyclerView.Adapter<InboxViewHolder> {
     public void onBindViewHolder(InboxViewHolder holder, int position) {
 
         MessageBundle dummyBundle = new MessageBundle(1, 1, "");
+        MessageListItem messageListItem = items.get(position);
         holder.userInitials.getBackground().setColorFilter(colors[position % colors.length], PorterDuff.Mode.SRC);
-        holder.date.setText(DateConverter.getFormattedDate(items.get(position).getDate()));
+        holder.date.setText(DateConverter.getFormattedDate(messageListItem.getDate()));
+        holder.author.setText(String.format("%s %s", messageListItem.getUser().getFirstName(), messageListItem.getUser().getLastName()));
+        holder.message.setText(messageListItem.getAd().getTitle());
         RxView.clicks(holder.itemView).map(event -> dummyBundle).subscribe(messagesClicks);
     }
 
