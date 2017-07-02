@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
 import static pl.sggw.stosprzepelniony.util.ObservableExtensions.withObservableRetryErrorLogic;
@@ -38,18 +39,24 @@ public class ChatPresenter
         addSubscription(
                 refreshMessagesSubject
                         .filter(event -> isViewAttached())
+                        .observeOn(AndroidSchedulers.mainThread())
                         .doOnNext(event -> getView().showLoading())
                         .flatMap(event -> getInteractor().getMessagesFromUserById(
                                 getArgs().getInt(ChatContract.View.AD_ID_BUNDLE),
                                 getArgs().getInt(ChatContract.View.USER_ID_BUNDLE)))
+                        .observeOn(Schedulers.computation())
+                        .concatMap(messages ->
+                                Observable.fromIterable(messages).sorted((o1, o2) ->
+                                        o1.getDate().compareTo(o2.getDate())
+                                ).toList().toObservable())
                         .observeOn(AndroidSchedulers.mainThread())
+                        .compose(withObservableRetryErrorLogic(error -> getView().showError(error, false)))
                         .subscribe(messages -> {
                                     if (messages.isEmpty())
                                         getView().showEmptyState();
                                     else
                                         getView().showContent(messages);
-                                },
-                                error -> getView().showError(error, true)));
+                                }));
         addSubscription(
                 getView()
                         .getSendButtonClicks()
@@ -72,7 +79,7 @@ public class ChatPresenter
         refreshMessagesSubject.onNext(Irrelevant.EVENT);
         addSubscription(
                 Observable
-                        .interval(5, TimeUnit.SECONDS)
+                        .interval(10, TimeUnit.SECONDS)
                         .map(event -> Irrelevant.EVENT)
                         .doOnNext(refreshMessagesSubject::onNext)
                         .subscribe());
