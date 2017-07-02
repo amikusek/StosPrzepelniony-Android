@@ -3,10 +3,10 @@ package pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.imp
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentStorage;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import pl.sggw.stosprzepelniony.data.network.util.persistent_cookie_storage.PersistentStorage;
 
 public class SharedPreferencesPersistentStorage implements PersistentStorage {
 
@@ -14,6 +14,7 @@ public class SharedPreferencesPersistentStorage implements PersistentStorage {
     private static final String COOKIES_STORE_LOCATION = "Cookies";
     private static final String SESSION_TOKEN_STORE_LOCATION = "SessionToken";
     private static final String AUTO_SIGN_IN_LOCATION = "AutoSignIn";
+    private static final String USER_ID_LOCATION = "UserID";
     private SharedPreferences sharedPreferences;
 
     public SharedPreferencesPersistentStorage(Context context) {
@@ -73,6 +74,19 @@ public class SharedPreferencesPersistentStorage implements PersistentStorage {
     @Override
     public boolean isAutoSignInEnabled() {
         return sharedPreferences.getBoolean(AUTO_SIGN_IN_LOCATION, true);
+    }
+
+    @Override
+    public void saveUserId(int userId) {
+        sharedPreferences
+                .edit()
+                .putInt(USER_ID_LOCATION, userId)
+                .apply();
+    }
+
+    @Override
+    public int getUserId() {
+        return sharedPreferences.getInt(USER_ID_LOCATION, 0);
     }
 
 }

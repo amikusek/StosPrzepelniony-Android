@@ -12,4 +12,6 @@ public interface PersistentStorage {
     void clearSessionToken();
     void setAutoSignInEnabled(boolean enabled);
     boolean isAutoSignInEnabled();
+    void saveUserId(int userId);
+    int getUserId();
 }
