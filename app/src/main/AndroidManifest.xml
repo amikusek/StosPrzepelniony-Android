@@ -19,7 +19,8 @@
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity
                 android:name=".viper.register.RegisterActivity"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue"/>
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue"
+                android:noHistory="true"/>
         <activity
                 android:name=".viper.reset_password.ResetPasswordActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.Blue"/>
@@ -33,7 +34,8 @@
                 android:theme="@style/Theme.NewAdTheme"/>
         <activity
                 android:name=".viper.splash.SplashActivity"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+                android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
